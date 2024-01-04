@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from selenium import webdriver
 
@@ -16,5 +18,6 @@ class TestLogin:
 
     def test02(self):
         # loginpage = login(self.driver)
-        loginpage.fill_info("benikun88@gmail.com", "1q2w3e4r")
+        loginpage.fill_info("benikun88@gmail.com", "1q2w3e4r!")
+        time.sleep(7)
         assert loginpage.get_success_login() == "Welcome, Benjamin Kun!"
