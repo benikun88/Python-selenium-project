@@ -21,8 +21,8 @@ class Login(BasePage):
         self.click(self.CLICK_BTN)
 
 
-    def click_login(self):
-        self.click(self.CLICK_LOGIN)
+    # def click_login(self):
+    #     self.click(self.CLICK_LOGIN)
 
     def get_email_error(self):
         return self.get_text(self.EMAIL_FIELD_ERROR)
