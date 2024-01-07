@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 
-from pages.BasePage import BasePage
+from pages.base_page import BasePage
 from pages.cart_page import CartPage
 
 
@@ -42,4 +42,6 @@ class MiniCartPage(BasePage):
         self.click(self.UPDATE_BTN)
 
     def remove_item(self):
+        self.click(self.REMOVE_ITEM)
+    def view_cart(self):
         self.click(self.REMOVE_ITEM)

@@ -1,7 +1,7 @@
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
-from pages.BasePage import BasePage
+from pages.base_page import BasePage
 
 
 class LoginPage(BasePage):
