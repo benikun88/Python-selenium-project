@@ -3,8 +3,8 @@ import time
 import pytest
 from selenium import webdriver
 
-from pages.login_page import Login
-from pages.topbar import TopBar
+from pages.login_page import LoginPage
+from pages.top_bar import TopBar
 
 
 class TestLogin:

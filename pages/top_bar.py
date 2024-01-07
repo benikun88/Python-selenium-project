@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 from pages.BasePage import BasePage
-from pages.login_page import Login
+from pages.login_page import LoginPage
 
 
 class TopBar(BasePage):
@@ -18,4 +18,4 @@ class TopBar(BasePage):
     # click on the login button
     def click_login(self):
         self.click(self.CLICK_LOGIN)
-        return Login(self.driver)
+        return LoginPage(self.driver)

@@ -10,7 +10,7 @@ class MiniCartPage(BasePage):
     CART_SUBTOTAL_PRICE = (By.CSS_SELECTOR, "span[data-bind='html: cart().subtotal_excl_tax'] span[class='price']")
     CART_ITEM_PRICE = (By.CSS_SELECTOR, "span[class='minicart-price'] span[class='price']")
     PRODUCTS_MINICART_ITEMS: list = (
-    By.CSS_SELECTOR, ".minicart-items .item.product.product-item .product-item-details .product-item-name")
+        By.CSS_SELECTOR, ".minicart-items .item.product.product-item .product-item-details .product-item-name")
     EDIT_ITEM = (By.CSS_SELECTOR, "a[title='Edit item']")
     REMOVE_ITEM = (By.CSS_SELECTOR, "a[title='Remove item']")
     ITEM_DETIELS = (By.CSS_SELECTOR, "span[role='tab']")
@@ -19,6 +19,7 @@ class MiniCartPage(BasePage):
     VIEW_EDIT_BTN = (By.CSS_SELECTOR, ".action.viewcart")
     UPDATE_BTN = (By.CSS_SELECTOR, ".update-cart-item")
     QTY_TEXTBOX = (By.CSS_SELECTOR, ".item-qty.cart-item-qty")
+    EMPTY_CART_MSG = (By.CSS_SELECTOR, ".subtitle.empty")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -32,6 +33,9 @@ class MiniCartPage(BasePage):
 
     def get_subtotal_price(self):
         return self.get_text(self.CART_SUBTOTAL_PRICE)
+
+    def get_cart_empty_msg(self):
+        return self.get_text(self.EMPTY_CART_MSG)
 
     def fill_quantity(self):
         self.fill_text(self.QTY_TEXTBOX)
