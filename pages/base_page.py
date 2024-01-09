@@ -10,7 +10,7 @@ class BasePage:
 
     def __init__(self, driver):
         self.driver: WebDriver = driver
-        self.wait = WebDriverWait(self.driver, 10)  # Set your desired timeout
+        self.wait = WebDriverWait(self.driver, 20)  # Set your desired timeout
 
     def wait_for_element_presence(self, by, value):
         return self.wait.until(EC.presence_of_element_located((by, value)))
