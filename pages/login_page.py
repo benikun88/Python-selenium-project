@@ -11,6 +11,7 @@ class LoginPage(BasePage):
     CLICK_LOGIN = (By.CSS_SELECTOR, "div[class='panel header'] li[data-label='or'] a")
     EMAIL_FIELD_ERROR = (By.CSS_SELECTOR, "#email-error")
     PASSWORD_FIELD_ERROR = (By.CSS_SELECTOR, "#pass-error")
+    WRONG_SIGNIN_ERROR = (By.CSS_SELECTOR, ".message-error.error.message")
     MY_ACCOUNT_BTN = (By.CSS_SELECTOR, "div[class='panel header'] li[class='greet welcome']")
 
     def __init__(self, driver):
@@ -21,7 +22,6 @@ class LoginPage(BasePage):
         self.fill_text(self.EMAIL_FIELD, email)
         self.fill_text(self.PASSWORD_FIELD, password)
         self.click(self.CLICK_BTN)
-
 
     # def click_login(self):
     #     self.click(self.CLICK_LOGIN)

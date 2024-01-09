@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 
-@pytest.fixture(scope="class", autouse=True)
+@pytest.fixture(autouse=True)
 def setup(request):
     global driver
     options = Options()

@@ -9,17 +9,46 @@ from pages.top_bar import TopBar
 
 class TestLogin:
 
-    def test01(self):
-        global loginpage
-        global topBarPage
-        topBarPage = TopBar(self.driver)
-        loginpage=topBarPage.click_login()
-        loginpage.fill_info("benikun88@gmail.com","")
-        # print(loginpage.get_email_error())
-        assert loginpage.get_password_error() == "This is a required field."
+    @pytest.mark.parametrize("username, password, expected_error", [
+        ("benikun88@gmail.com", "", "This is a required field."),
+        ("benikun88@gmail.com", "1q2w3e4r!", None),  # No error expected for valid data
+        ("benikun88", "", "Please enter a valid email address (Ex: johndoe@domain.com)."),
+    ])
+    def test_login_with_different_data(self, setup, username, password, expected_error):
+        top_bar_page = TopBar(self.driver)
+        login_page = top_bar_page.click_login()
+        login_page.fill_info(username, password)
 
-    def test02(self):
-        # loginpage = login(self.driver)
-        loginpage.fill_info("benikun88@gmail.com", "1q2w3e4r!")
-        time.sleep(7)
-        assert topBarPage.get_success_login() == "Welcome, Benjamin Kun!"
+        if expected_error:
+            assert login_page.get_password_error() == expected_error
+        else:
+            # Add other assertions for successful login
+            top_bar_page.wait_for_msg_dissaper()
+            assert top_bar_page.get_success_login() == "Welcome, Benjamin Kun."
+
+    # def test_empty_password_error(self):
+    #     global loginpage
+    #     global topBarPage
+    #     topBarPage = TopBar(self.driver)
+    #     loginpage = topBarPage.click_login()
+    #     loginpage.fill_info("benikun88@gmail.com", "")
+    #     # print(loginpage.get_email_error())
+    #     assert loginpage.get_password_error() == "This is a required field.", "Password error message is not as expected"
+    #
+    # def test_successful_login(self):
+    #     global loginpage
+    #     global topBarPage
+    #     topBarPage = TopBar(self.driver)
+    #     loginpage = topBarPage.click_login()
+    #     loginpage.fill_info("benikun88@gmail.com", "1q2w3e4r!")
+    #     time.sleep(7)
+    #     assert topBarPage.get_success_login() == "Welcome, Benjamin Kun!", "Password error message is not as expected"
+    #
+    # def test_invalid_email_error(self):
+    #     global loginpage
+    #     global topBarPage
+    #     topBarPage = TopBar(self.driver)
+    #     loginpage = topBarPage.click_login()
+    #     loginpage.fill_info("benikun88", "")
+    #     time.sleep(7)
+    #     assert loginpage.get_email_error() == "Please enter a valid email address (Ex: johndoe@domain.com).", "Password error message is not as expected"

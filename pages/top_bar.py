@@ -12,6 +12,7 @@ class TopBar(BasePage):
     SEARCH_BTN = (By.CSS_SELECTOR, "button[title='Search']")
     TOP_BAR_ITEMS = (By.CSS_SELECTOR, ".level-top.ui-corner-all")
     MY_ACCOUNT_BTN = (By.CSS_SELECTOR, "div[class='panel header'] li[class='greet welcome']")
+    MSG_DISSAPPER = (By.CSS_SELECTOR, "div[class='panel header'] span[class='not-logged-in']")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -23,3 +24,5 @@ class TopBar(BasePage):
 
     def get_success_login(self):
         return self.get_text(self.MY_ACCOUNT_BTN)
+    def wait_for_msg_dissaper(self):
+        self.wait_for_element_invisibility(self.MSG_DISSAPPER)
