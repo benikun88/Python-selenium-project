@@ -11,6 +11,7 @@ class TopBar(BasePage):
     SEARCH_TEXT_BOX = (By.CSS_SELECTOR, "#search")
     SEARCH_BTN = (By.CSS_SELECTOR, "button[title='Search']")
     TOP_BAR_ITEMS = (By.CSS_SELECTOR, ".level-top.ui-corner-all")
+    MY_ACCOUNT_BTN = (By.CSS_SELECTOR, "div[class='panel header'] li[class='greet welcome']")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -19,3 +20,6 @@ class TopBar(BasePage):
     def click_login(self):
         self.click(self.CLICK_LOGIN)
         return LoginPage(self.driver)
+
+    def get_success_login(self):
+        return self.get_text(self.MY_ACCOUNT_BTN)
