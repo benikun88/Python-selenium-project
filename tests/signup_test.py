@@ -9,8 +9,9 @@ class TestSignUp:
         url = "https://magento.softwaretestingboard.com/customer/account/"
         global create_account
         topBarPage = TopBar(self.driver)
-        create_account=topBarPage.click_create_account()
-        create_account.sign_up("test","test2","b888@mail.com","1q2w3e4r!","1q2w3e4r!")
+        create_account = topBarPage.click_create_account()
+        create_account.sign_up("test", "test2", "b888@mail.com", "1q2w3e4r!", "1q2w3e4r!")
         # print(loginpage.get_email_error())
         time.sleep(5)
+        print(create_account.get_exiting_user())
         assert create_account.driver.current_url == url

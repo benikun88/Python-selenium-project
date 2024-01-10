@@ -17,6 +17,7 @@ class SignUpPage(BasePage):
     EMAIL_TEXT_BOX_ERROR=(By.CSS_SELECTOR,"#email_address-error")
     PASSWORD_TEXT_BOX_ERROR=(By.CSS_SELECTOR,"#password-error")
     PASSWORD_CONFIRMATION_TEXT_BOX_ERROR=(By.CSS_SELECTOR,"#password-confirmation-error")
+    EXITING_USER_ERROR_MSG=(By.CSS_SELECTOR,"div[data-bind='html: $parent.prepareMessageForHtml(message.text)']")
 
     # Minimum length of this field must be equal or greater than 8 symbols. Leading and trailing spaces will be ignored.
     # Please enter a valid email address (Ex: johndoe@domain.com).
@@ -33,3 +34,6 @@ class SignUpPage(BasePage):
         self.fill_text(self.PASSWORD_TEXT_BOX, password)
         self.fill_text(self.PASSWORD_CONFIRMATION_TEXT_BOX, repeat_password)
         self.click(self.CREATE_ACCOUNT_BTN)
+
+    def get_exiting_user(self):
+        return self.get_text(self.EXITING_USER_ERROR_MSG)
