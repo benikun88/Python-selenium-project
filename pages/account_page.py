@@ -14,6 +14,10 @@ class AccountPage(BasePage):
     NUMBER_OF_ITEMS_IN_CART = (By.CSS_SELECTOR,".count")
     MINI_CART_CLOSE_BTN = (By.CSS_SELECTOR,"#btn-minicart-close")
     VIEW_EDIT_BTN = (By.CSS_SELECTOR,".action.viewcart")
+    SUCCESSFUL_RESTORATION=(By.CSS_SELECTOR,"div[data-bind='html: $parent.prepareMessageForHtml(message.text)']")
 
     def __init__(self, driver):
         super().__init__(driver)
+
+    def get_successful_registration_text_msg(self):
+        return self.get_text(self.SUCCESSFUL_RESTORATION)

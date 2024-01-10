@@ -1,6 +1,7 @@
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
+from pages.account_page import AccountPage
 from pages.base_page import BasePage
 
 
@@ -34,6 +35,9 @@ class SignUpPage(BasePage):
         self.fill_text(self.PASSWORD_TEXT_BOX, password)
         self.fill_text(self.PASSWORD_CONFIRMATION_TEXT_BOX, repeat_password)
         self.click(self.CREATE_ACCOUNT_BTN)
+        return AccountPage(self.driver)
 
-    def get_exiting_user(self):
+    def get_exiting_user_error(self):
         return self.get_text(self.EXITING_USER_ERROR_MSG)
+
+
