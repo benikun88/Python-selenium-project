@@ -18,7 +18,7 @@ class SignUpPage(BasePage):
     EMAIL_TEXT_BOX_ERROR=(By.CSS_SELECTOR,"#email_address-error")
     PASSWORD_TEXT_BOX_ERROR=(By.CSS_SELECTOR,"#password-error")
     PASSWORD_CONFIRMATION_TEXT_BOX_ERROR=(By.CSS_SELECTOR,"#password-confirmation-error")
-    EXITING_USER_ERROR_MSG=(By.CSS_SELECTOR,"div[data-bind='html: $parent.prepareMessageForHtml(message.text)']")
+    EXITING_USER_OR_EMAIL_RECOVER_ERROR_MSG=(By.CSS_SELECTOR, "div[data-bind='html: $parent.prepareMessageForHtml(message.text)']")
 
     # Minimum length of this field must be equal or greater than 8 symbols. Leading and trailing spaces will be ignored.
     # Please enter a valid email address (Ex: johndoe@domain.com).
@@ -38,6 +38,6 @@ class SignUpPage(BasePage):
         return AccountPage(self.driver)
 
     def get_exiting_user_error(self):
-        return self.get_text(self.EXITING_USER_ERROR_MSG)
+        return self.get_text(self.EXITING_USER_OR_EMAIL_RECOVER_ERROR_MSG)
 
 
