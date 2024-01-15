@@ -5,6 +5,7 @@ from pages.top_bar import TopBar
 
 
 class TestSignUp:
+    # test change
     def test_successful_signup(self):
         url = "https://magento.softwaretestingboard.com/customer/account/"
         topBarPage = TopBar(self.driver)
