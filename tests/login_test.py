@@ -14,7 +14,7 @@ class TestLogin:
         ("benikun88@gmail.com", "1q2w3e4r!", None, None),  # No error expected for valid data
         ("benikun88", "", "Please enter a valid email address (Ex: johndoe@domain.com).", None),
     ])
-    # test the login funcionality
+    # test the login functionality
     def test_login_with_different_data(self, setup, username, password, expected_email_error, expected_password_error):
         top_bar_page = TopBar(self.driver)
         login_page = top_bar_page.click_login()
