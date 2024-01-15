@@ -15,6 +15,7 @@ class TestSignUp:
         time.sleep(5)
         assert account_page.get_successful_registration_text_msg() == "Thank you for registering with Main Website Store."
     # test existing user
+
     def test_existing_user_signup(self):
         url = "https://magento.softwaretestingboard.com/customer/account/"
         topBarPage = TopBar(self.driver)
