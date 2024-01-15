@@ -34,11 +34,12 @@ class CartPage(BasePage):
     def get_cart_empty_msg(self):
         return self.get_text(self.EMPTY_CART_MSG)
 
-    def fill_quantity(self):
-        self.fill_text(self.QTY_TEXTBOX)
+    def fill_quantity(self, qty):
+        self.fill_text(self.QTY_TEXTBOX, qty)
         self.click(self.UPDATE_QTY_BTN)
 
     def remove_item(self):
         self.click(self.REMOVE_ITEM)
+
     def view_cart(self):
         self.click(self.REMOVE_ITEM)
