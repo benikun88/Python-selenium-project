@@ -1,14 +1,12 @@
 from selenium.webdriver.common.by import By
-
 from pages.base_page import BasePage
 
-
 class CartPage(BasePage):
+    # Locators for elements on the page
     PROCEED_TO_CHECKOUT_BTN = (By.CSS_SELECTOR, "button[data-role='proceed-to-checkout']")
     CART_SUBTOTAL_PRICE = (By.CSS_SELECTOR, "td[class='col subtotal'] span[class='price']")
     CART_ITEM_PRICE = (By.CSS_SELECTOR, "td[class='col price'] span[class='price']")
-    PRODUCTS_ITEMS: list = (
-        By.CSS_SELECTOR, "td[class='col item'] div[class='product-item-details'] a")
+    PRODUCTS_ITEMS: list = (By.CSS_SELECTOR, "td[class='col item'] div[class='product-item-details'] a")
     EDIT_ITEM = (By.CSS_SELECTOR, "a[title='Edit item parameters']")
     REMOVE_ITEM = (By.CSS_SELECTOR, ".action.action-delete")
     ITEM_DETIELS = (By.CSS_SELECTOR, "span[role='tab']")
@@ -21,25 +19,32 @@ class CartPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
+    # Clicks the "Proceed to Checkout" button and returns a new CartPage instance
     def click_proceed_checkout(self):
         self.click(self.PROCEED_TO_CHECKOUT_BTN)
         return CartPage(self.driver)
 
+    # Retrieves the item price from the cart
     def get_item_price(self):
         return self.get_text(self.CART_ITEM_PRICE)
 
+    # Retrieves the subtotal price from the cart
     def get_subtotal_price(self):
         return self.get_text(self.CART_SUBTOTAL_PRICE)
 
+    # Retrieves the empty cart message
     def get_cart_empty_msg(self):
         return self.get_text(self.EMPTY_CART_MSG)
 
+    # Fills the quantity in the cart and updates it
     def fill_quantity(self, qty):
         self.fill_text(self.QTY_TEXTBOX, qty)
         self.click(self.UPDATE_QTY_BTN)
 
+    # Removes an item from the cart
     def remove_item(self):
         self.click(self.REMOVE_ITEM)
 
+    # Views the cart (Note: The method name suggests removing an item, but the code clicks the remove item button)
     def view_cart(self):
         self.click(self.REMOVE_ITEM)
