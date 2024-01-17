@@ -24,7 +24,8 @@ class SignUpPage(BasePage):
     EMAIL_TEXT_BOX_ERROR = (By.CSS_SELECTOR, "#email_address-error")
     PASSWORD_TEXT_BOX_ERROR = (By.CSS_SELECTOR, "#password-error")
     PASSWORD_CONFIRMATION_TEXT_BOX_ERROR = (By.CSS_SELECTOR, "#password-confirmation-error")
-    EXITING_USER_OR_EMAIL_RECOVER_ERROR_MSG = (By.CSS_SELECTOR, "div[data-bind='html: $parent.prepareMessageForHtml(message.text)']")
+    EXITING_USER_OR_EMAIL_RECOVER_ERROR_MSG = (
+    By.CSS_SELECTOR, "div[data-bind='html: $parent.prepareMessageForHtml(message.text)']")
 
     # Minimum length of this field must be equal or greater than 8 symbols.
     # Leading and trailing spaces will be ignored.
