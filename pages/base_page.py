@@ -1,3 +1,4 @@
+from selenium.common import WebDriverException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
@@ -54,14 +55,22 @@ class BasePage:
         email = f"{username}@{domain}"
         return email
 
-    def select_by_value(self, element, value):
-        select = Select(element)
+    def select_by_value(self, locator, value):
+        select = Select(*locator)
         select.select_by_value(value)
 
-    def select_by_text(self, element, text):
-        select = Select(element)
+    def select_by_text(self, locator, text):
+        select = Select(*locator)
         select.select_by_visible_text(text)
 
-    def select_by_index(self, element, index):
-        select = Select(element)
+    def select_by_index(self, locator, index):
+        select = Select(*locator)
         select.select_by_index(index)
+
+    def is_elements_exist(self, locator):
+
+        try:
+            self.wait_for_element_visibility(*locator)
+            return locator.is_displayed()
+        except WebDriverException as e:
+            return False
