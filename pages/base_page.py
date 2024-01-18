@@ -22,6 +22,10 @@ class BasePage:
     def wait_for_element_visibility(self, by, value):
         return self.wait.until(EC.visibility_of_element_located((by, value)))
 
+    def wait_for_elements_visibility(self, by, value):
+        """Wait for the visibility of multiple elements."""
+        return self.wait.until(EC.visibility_of_all_elements_located((by, value)))
+
     def wait_for_element_invisibility(self, by, value):
         return self.wait.until(EC.invisibility_of_element((by, value)))
 
@@ -74,3 +78,7 @@ class BasePage:
             return locator.is_displayed()
         except WebDriverException as e:
             return False
+
+    def navigate_to(self, url):
+        """Navigate to a specific URL."""
+        self.driver.get(url)

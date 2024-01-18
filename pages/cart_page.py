@@ -22,8 +22,10 @@ class CartPage(BasePage):
     DISCOUNT_CODE_TEXT_BOX = (By.CSS_SELECTOR, "#coupon_code")
     APPLY_DISCOUNT_BTN = (By.CSS_SELECTOR, "button[value='Apply Discount'] span")
     CANCEL_DISCOUNT_COUPON_BTN = (By.CSS_SELECTOR, "button[value='Cancel'] span span")
-    DISCOUNT_COUPON_SUCCSES_MSG = (By.CSS_SELECTOR, "div[data-ui-id='checkout-cart-validationmessages-message-success']")
+    DISCOUNT_COUPON_SUCCSES_MSG = (
+    By.CSS_SELECTOR, "div[data-ui-id='checkout-cart-validationmessages-message-success']")
     DISCOUNT_COUPON_ERROR_MSG = (By.CSS_SELECTOR, "div[data-ui-id='checkout-cart-validationmessages-message-error']")
+
     # discount code is 20poff
     def __init__(self, driver):
         super().__init__(driver)
