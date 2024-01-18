@@ -10,6 +10,7 @@ class TopBar(BasePage):
     CLICK_LOGIN = (By.CSS_SELECTOR, "div[class='panel header'] li[data-label='or'] a")
     CREATE_ACCOUNT_BTN = (By.XPATH, "//div[@class='panel header']//a[normalize-space()='Create an Account']")
     CART_ICON_BTN = (By.CSS_SELECTOR, ".action.showcart")
+    CART_COUNTER = (By.CSS_SELECTOR, ".counter-number")
     SEARCH_TEXT_BOX = (By.CSS_SELECTOR, "#search")
     SEARCH_BTN = (By.CSS_SELECTOR, "button[title='Search']")
     TOP_BAR_ITEMS = (By.CSS_SELECTOR, ".level-top.ui-corner-all")

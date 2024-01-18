@@ -36,7 +36,7 @@ class ProductPage(BasePage):
                 return
 
     def choose_product_color(self, color):
-        """Choose the product color on the page."""
+        # Choose the product color on the page.
         color_elements = self.wait_for_elements_visibility(*self.PRODUCT_COLOR_LIST)
 
         for color_element in color_elements:
@@ -58,9 +58,9 @@ class ProductPage(BasePage):
         pass
 
     def get_chosen_size(self):
-        """Get the text of the chosen size element."""
+        # Get the text of the chosen size element.
         return self.get_text(self.CHOSEN_SIZE)
 
     def get_chosen_color(self):
-        """Get the text of the chosen color element."""
+        # Get the text of the chosen color element.
         return self.get_text(self.CHOSEN_COLOR)
