@@ -52,11 +52,6 @@ class ProductPage(BasePage):
         # Click the 'Add to Cart' button.
         self.click(self.ADD_TO_CART_BTN)
 
-    def click_buy_now(self):
-        # Click the 'Buy Now' button.
-        # Implement the logic for the "Buy Now" button click if available on the page
-        pass
-
     def get_chosen_size(self):
         # Get the text of the chosen size element.
         return self.get_text(self.CHOSEN_SIZE)
