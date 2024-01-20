@@ -2,6 +2,7 @@ import time
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from pages.login_page import LoginPage
+from pages.search_page import SearchPage
 from pages.signup_page import SignUpPage
 
 
@@ -63,3 +64,12 @@ class TopBar(BasePage):
     # Clicks on the "Sign Out" button
     def click_sign_out(self):
         self.click(self.SIGN_OUT_BTN)
+
+    def perform_search(self, query):
+        # Enter a search query and submit the search form.
+        self.fill_text(self.SEARCH_TEXT_BOX, query)  # Assuming you have a fill method in BasePage
+
+    def click_search_button(self):
+        # Click on the search button to initiate the search.
+        self.click(self.SEARCH_TEXT_BOX)
+        return SearchPage(self.driver)
