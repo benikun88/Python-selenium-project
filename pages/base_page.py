@@ -34,12 +34,14 @@ class BasePage:
 
     def click(self, locator) -> None:
         el: WebElement = self.wait_for_element_clickable(*locator)
+        self.driver.execute_script("arguments[0].setAttribute('style', 'border: 1px solid blue;');", el)
         #
         el.click()
 
     def fill_text(self, locator, txt: str) -> None:
         el: WebElement = self.wait_for_element_clickable(*locator)
         self.wait_for_element_visibility(*locator)
+        self.driver.execute_script("arguments[0].setAttribute('style', 'border: 1px solid blue;');", el)
         el.clear()
         el.send_keys(txt)
 
