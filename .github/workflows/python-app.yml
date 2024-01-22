@@ -1,40 +1,33 @@
-name: Python CI with pytest and Allure
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: pytest-demo
 
 on:
   push:
-    branches:
-      - main
+    branches: [ master ]
   pull_request:
-    branches:
-      - main
+    branches: [ master ]
 
 jobs:
-  test:
+  build:
+
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8]
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
       with:
-        python-version: 3.12
-
+        python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-
-    - name: Run tests and generate Allure report
+    - name: Test with pytest
       run: |
-        pytest --alluredir=allure-results
-        allure generate allure-results -o allure-report
-
-    - name: Upload Allure report artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: allure-report
-        path: allure-report
-
-  # Add additional jobs, such as deployment, notifications, etc., as needed.
+        pip install pytest
+        python -m pytest
