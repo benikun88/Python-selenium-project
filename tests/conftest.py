@@ -10,12 +10,6 @@ import allure
 from _pytest.fixtures import fixture
 from selenium import webdriver
 
-#
-# def pytest_exception_interact(report):
-#     if report.failed:
-#         allure.attach(body=driver.get_screenshot_as_png(), name="screenshot",
-#                       attachment_type=allure.attachment_type.PNG)
-
 
 @pytest.fixture(autouse=True)
 def setup(request):
@@ -30,3 +24,9 @@ def setup(request):
     driver.get("https://magento.softwaretestingboard.com/")
     yield
     driver.quit()
+
+
+# def pytest_exception_interact(report):
+#     if report.failed:
+#         allure.attach(body=driver.get_screenshot_as_png(), name="screenshot",
+#                       attachment_type=allure.attachment_type.PNG)
