@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         uses: py-actions/py-dependency-install@v2
         with:
-          path: requirements/req.txt
+          path: requirements.txt
       - name: Install plugin
         run: pip install pytest-github-actions-annotate-failures
       - name: Install ChromeDriver
