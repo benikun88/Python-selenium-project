@@ -22,6 +22,7 @@ def setup(request):
     global driver
     options = Options()
     options.add_experimental_option("detach", True)
+    options.add_argument("--headless")
     driver = webdriver.Chrome(options=options)
     request.cls.driver = driver
     # driver = webdriver.Chrome()
