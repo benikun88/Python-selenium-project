@@ -28,7 +28,9 @@ jobs:
 
     - name: Run tests and generate Allure report
       run: |
-          pytest -m devRun
+        pytest --alluredir=allure-results -m devRun
+        allure generate allure-results -o allure-report
+
 
 
   # Add additional jobs, such as deployment, notifications, etc., as needed.
