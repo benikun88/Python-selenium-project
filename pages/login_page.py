@@ -7,6 +7,7 @@ from pages.base_page import BasePage
 
 class LoginPage(BasePage):
     # Locators for elements on the page
+    LOGIN_PAGE_LOAD_TITLE = (By.CSS_SELECTOR, ".base")
     EMAIL_FIELD = (By.CSS_SELECTOR, "#email")
     PASSWORD_FIELD = (By.NAME, "login[password]")
     CLICK_BTN = (By.CSS_SELECTOR, ".action.login.primary")
@@ -42,3 +43,7 @@ class LoginPage(BasePage):
     def get_success_login(self):
         # Return the text of the my account button (indicating a successful login)
         return self.get_text(self.MY_ACCOUNT_BTN)
+
+    @allure.step("Check if LoginPage is loaded")
+    def is_page_loaded(self):
+        return self.is_elements_exist(self.LOGIN_PAGE_LOAD_TITLE)
