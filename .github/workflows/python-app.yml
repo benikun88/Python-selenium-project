@@ -31,7 +31,7 @@ jobs:
         pip install allure-pytest
     - name: Run tests and generate Allure report
       run: |
-        pytest --alluredir=allure-results --m devRun
+        pytest --alluredir=allure-results -m devRun
         allure generate allure-results -o allure-report
 
 
