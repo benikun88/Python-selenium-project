@@ -19,26 +19,23 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.x'
+        python-version: '3.12'
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Install Allure
-      run: |
-        sudo apt-add-repository -y ppa:qameta/allure
-        sudo apt-get update
-        sudo apt-get install allure
-
     - name: Run tests and generate Allure report
       run: |
-        pytest --alluredir=allure-results -m devRun
-        allure generate allure-results -o allure-report
+#        pytest --alluredir=allure-results -m devRun
+        pytest -m devRun
+#        allure generate allure-results -o allure-report
 
-    - name: Upload Allure report artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: allure-report
-        path: allure-report
+#    - name: Upload Allure report artifacts
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name: allure-report
+#        path: allure-report
+
+  # Add additional jobs, such as deployment, notifications, etc., as needed.
