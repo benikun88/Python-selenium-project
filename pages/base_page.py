@@ -74,10 +74,9 @@ class BasePage:
         select.select_by_index(index)
 
     def is_elements_exist(self, locator):
-
         try:
-            self.wait_for_element_visibility(*locator)
-            return locator.is_displayed()
+            element = self.wait_for_element_visibility(*locator)
+            return element.is_displayed()
         except WebDriverException as e:
             return False
 

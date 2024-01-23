@@ -11,7 +11,9 @@ from pages.top_bar import TopBar
 class TestLogin:
     @pytest.mark.devRun
     def test_page_loaded(self):
-        assert LoginPage(self.driver).is_page_loaded=="Customer Login"
+        top_bar_page = TopBar(self.driver)
+        login_page = top_bar_page.click_login()
+        assert login_page.is_page_loaded() == True
 
     @allure.description("""
         Test the login functionality with different data.
