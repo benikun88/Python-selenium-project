@@ -26,20 +26,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Install Allure
-      run: |
-        wget https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.15.0/allure-commandline-2.15.0.zip
-        unzip allure-commandline-2.15.0.zip
-        sudo cp -r allure-2.15.0/bin/* /usr/local/bin/
-        sudo rm -rf allure-2.15.0 allure-commandline-2.15.0.zip
-
     - name: Run tests and generate Allure report
       run: |
-        pytest --alluredir=allure-results -m devRun
-        allure generate allure-results -o allure-report
+        pytest -m devRun
+#        allure generate allure-results -o allure-report
 
-    - name: Upload Allure report artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: allure-report
-        path: allure-report
+#    - name: Upload Allure report artifacts
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name: allure-report
+#        path: allure-report
