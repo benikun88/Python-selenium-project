@@ -26,6 +26,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Install Allure
+      run: |
+        pip install allure-pytest
     - name: Run tests and generate Allure report
       run: |
         pytest --alluredir=allure-results -m devRun
