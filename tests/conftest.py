@@ -18,6 +18,7 @@ def setup(request):
     options.add_experimental_option("detach", True)
     options.add_argument("--headless")
     options.add_argument("--disable-gpu")
+    options.add_argument("--window-size=1920,1200")
     driver = webdriver.Chrome(options=options)
     request.cls.driver = driver
     # driver = webdriver.Chrome()

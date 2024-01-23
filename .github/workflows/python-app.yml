@@ -33,9 +33,6 @@ jobs:
       run: |
         pytest --alluredir=allure-results -v
 
-    
-    
-
     - name: Add allure information
       working-directory: allure-results
       if: always()
@@ -46,19 +43,21 @@ jobs:
         echo GIT_COMMIT_AUTHOR_NAME=$(git show -s --format='%ae' HEAD) >> environment.properties
         echo GIT_COMMIT_TIME=$(git show -s --format=%ci HEAD) >> environment.properties
         echo CHROME_VERSION=$(google-chrome --product-version) >> environment.properties
-        - name: Allure results
-          uses: simple-elf/allure-report-action@master
-          if: always()
-          id: allure-report
-          with:
-            allure_results: allure-results
-            allure_report: allure-report
-            gh_pages: gh-pages
-            allure_history: allure-history
-        - name: Deploy report to Github Pages
-          if: always()
-          uses: peaceiris/actions-gh-pages@v3
-          with:
-            PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            PUBLISH_BRANCH: gh-pages
-            PUBLISH_DIR: allure-history
+
+    - name: Allure results
+      uses: simple-elf/allure-report-action@master
+      if: always()
+      id: allure-report
+      with:
+        allure_results: allure-results
+        allure_report: allure-report
+        gh_pages: gh-pages
+        allure_history: allure-history
+
+    - name: Deploy report to Github Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PUBLISH_BRANCH: gh-pages
+        PUBLISH_DIR: allure-history
