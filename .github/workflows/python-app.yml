@@ -1,63 +1,97 @@
-name: Python Automation with Chrome Headless
-
+#name: Python Automation with Chrome Headless
+#
+#on:
+#  push:
+#    branches:
+#      - main
+#  pull_request:
+#    branches:
+#      - main
+#
+#jobs:
+#  test:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#    - name: Checkout repository
+#      uses: actions/checkout@v2
+#
+#    - name: Set up Python
+#      uses: actions/setup-python@v2
+#      with:
+#        python-version: 3.12
+#
+#    - name: Install dependencies
+#      run: |
+#        python -m pip install --upgrade pip
+#        pip install -r requirements.txt  # Make sure you have a requirements.txt file with your dependencies
+#
+#    - name: Set up XVFB
+#      run: sudo apt-get install -y xvfb
+#
+#    - name: Run tests
+#      run: |
+#        pytest --alluredir=allure-results -v
+#
+#    - name: Add allure information
+#      working-directory: allure-results
+#      if: always()
+#      run: |
+#        echo GIT_BRANCH=${{ github.head_ref || github.ref_name }}  >> environment.properties
+#        echo GIT_COMMIT_ID=${{ github.sha }} >> environment.properties
+#        echo GIT_COMMIT_MESSAGE=$(git show -s --format=%s HEAD) >> environment.properties
+#        echo GIT_COMMIT_AUTHOR_NAME=$(git show -s --format='%ae' HEAD) >> environment.properties
+#        echo GIT_COMMIT_TIME=$(git show -s --format=%ci HEAD) >> environment.properties
+#        echo CHROME_VERSION=$(google-chrome --product-version) >> environment.properties
+#
+#    - name: Allure results
+#      uses: simple-elf/allure-report-action@master
+#      if: always()
+#      id: allure-report
+#      with:
+#        allure_results: allure-results
+#        allure_report: allure-report
+#        gh_pages: gh-pages
+#        allure_history: allure-history
+#
+#    - name: Deploy report to Github Pages
+#      if: always()
+#      uses: peaceiris/actions-gh-pages@v3
+#      with:
+#        PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        PUBLISH_BRANCH: gh-pages
+#        PUBLISH_DIR: allure-history
+name: Run Selenium On GitHub Action
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-
+  workflow_dispatch:
 jobs:
-  test:
+  scrape:
     runs-on: ubuntu-latest
-    
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checking out repo
+        uses: actions/checkout@v3
+      - name: Setting up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Installing package list
+        run: apt list --installed
+      - name: Removing previous chrome instances on runner
+        run: sudo apt purge google-chrome-stable
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.12
+       # Need to fetch reqs if needed
+      - name: Installing all necessary packages
+        run: pip install chromedriver-autoinstaller selenium pyvirtualdisplay
+      - name: Install xvfb
+        run: sudo apt-get install xvfb
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt  # Make sure you have a requirements.txt file with your dependencies
+      - name: Running the Python script
+        run: python Selenium-Template.py
 
-    - name: Set up XVFB
-      run: sudo apt-get install -y xvfb
-
-    - name: Run tests
-      run: |
-        pytest --alluredir=allure-results -v
-
-    - name: Add allure information
-      working-directory: allure-results
-      if: always()
-      run: |
-        echo GIT_BRANCH=${{ github.head_ref || github.ref_name }}  >> environment.properties
-        echo GIT_COMMIT_ID=${{ github.sha }} >> environment.properties
-        echo GIT_COMMIT_MESSAGE=$(git show -s --format=%s HEAD) >> environment.properties
-        echo GIT_COMMIT_AUTHOR_NAME=$(git show -s --format='%ae' HEAD) >> environment.properties
-        echo GIT_COMMIT_TIME=$(git show -s --format=%ci HEAD) >> environment.properties
-        echo CHROME_VERSION=$(google-chrome --product-version) >> environment.properties
-
-    - name: Allure results
-      uses: simple-elf/allure-report-action@master
-      if: always()
-      id: allure-report
-      with:
-        allure_results: allure-results
-        allure_report: allure-report
-        gh_pages: gh-pages
-        allure_history: allure-history
-
-    - name: Deploy report to Github Pages
-      if: always()
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PUBLISH_BRANCH: gh-pages
-        PUBLISH_DIR: allure-history
+      - name: Commit and Push The Results From Python Selenium Action
+        run: |
+         git config --global user.name "github-actions[bot]"
+         git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+         git add -A
+         git commit -m "GitHub Actions Results added"
+         git push
