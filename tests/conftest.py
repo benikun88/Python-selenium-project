@@ -16,8 +16,8 @@ def setup(request):
     global driver
     options = Options()
     options.add_experimental_option("detach", True)
-    # options.add_argument("--headless")
-    # options.add_argument("--disable-gpu")
+    options.add_argument("--headless")
+    options.add_argument("--disable-gpu")
     options.add_argument("--window-size=1200,1200")
     driver = webdriver.Chrome(options=options)
     request.cls.driver = driver
