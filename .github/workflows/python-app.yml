@@ -27,13 +27,15 @@ jobs:
         pip install -r requirements.txt
 
     - name: Install Allure
-      run: |
-        pip install allure-pytest
+      uses: dawidd6/action-setup-allure@v2
+
     - name: Run tests and generate Allure report
       run: |
         pytest --alluredir=allure-results -m devRun
         allure generate allure-results -o allure-report
 
-
-
-  # Add additional jobs, such as deployment, notifications, etc., as needed.
+    - name: Upload Allure report artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-report
+        path: allure-report
