@@ -30,6 +30,7 @@ jobs:
       run: |
 #        pytest --alluredir=allure-results -m devRun
         pytest -m devRun
+
 #        allure generate allure-results -o allure-report
 
 #    - name: Upload Allure report artifacts
