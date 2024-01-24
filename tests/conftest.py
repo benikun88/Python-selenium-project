@@ -3,6 +3,7 @@ from urllib import request
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 
 import os
 
@@ -19,7 +20,10 @@ def setup(request):
     options.add_argument("--headless")
     # options.add_argument("--disable-gpu")
     # options.add_argument("--window-size=1200,1200")
-    driver = webdriver.Chrome(options=options)
+    service = Service()
+    options = webdriver.ChromeOptions()
+    driver = webdriver.Chrome(service=service, options=options)
+    # driver = webdriver.Chrome(options=options)
     request.cls.driver = driver
     # driver = webdriver.Chrome()
     driver.maximize_window()
