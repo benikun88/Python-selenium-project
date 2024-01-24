@@ -1,6 +1,7 @@
 import time
 
 import allure
+import pytest
 
 import pages.base_page
 from pages.top_bar import TopBar
@@ -41,3 +42,10 @@ class TestSignUp:
         create_account.sign_up("test", "test2", "bk88@gmail.com", "1q2w3e4r!", "1q2w3e4r!")
         time.sleep(5)
         assert create_account.get_existing_user_error() == "There is already an account with this email address. If you are sure that it is your email address, click here to get your password and access your account."
+
+    @pytest.mark.devRun
+
+    def test_page_loaded(self):
+        top_bar_page = TopBar(self.driver)
+        account_page = top_bar_page.click_create_account()
+        assert account_page.is_page_loaded() == True

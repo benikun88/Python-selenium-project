@@ -9,7 +9,6 @@ from pages.top_bar import TopBar
 
 
 class TestLogin:
-    @pytest.mark.devRun
     def test_page_loaded(self):
         top_bar_page = TopBar(self.driver)
         login_page = top_bar_page.click_login()
