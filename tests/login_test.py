@@ -23,7 +23,8 @@ class TestLogin:
         - Invalid username and empty password, expecting email error: "Please enter a valid email address (Ex: johndoe@domain.com)."
     """)
     @pytest.mark.parametrize("username, password, expected_email_error, expected_password_error", [
-        ("benikun88@gmail.com", "1q2w3e4r!", None, None),  # No error expected for valid data,
+        # No error expected for valid data
+        ("benikun88@gmail.com", "1q2w3e4r!", None, None),
         ("benikun88@gmail.com", "", None, "This is a required field."),
         ("benikun88", "", "Please enter a valid email address (Ex: johndoe@domain.com).", None)
     ])
