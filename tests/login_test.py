@@ -42,29 +42,3 @@ class TestLogin:
             assert top_bar_page.get_success_login() == "Welcome, Benjamin Kun!"
             # Add additional assertions for successful login if needed
 
-    # def test_empty_password_error(self):
-    #     global loginpage
-    #     global topBarPage
-    #     topBarPage = TopBar(self.driver)
-    #     loginpage = topBarPage.click_login()
-    #     loginpage.fill_info("benikun88@gmail.com", "")
-    #     # print(loginpage.get_email_error())
-    #     assert loginpage.get_password_error() == "This is a required field.", "Password error message is not as expected"
-    #
-    # def test_successful_login(self):
-    #     global loginpage
-    #     global topBarPage
-    #     topBarPage = TopBar(self.driver)
-    #     loginpage = topBarPage.click_login()
-    #     loginpage.fill_info("benikun88@gmail.com", "1q2w3e4r!")
-    #     time.sleep(7)
-    #     assert topBarPage.get_success_login() == "Welcome, Benjamin Kun!", "Password error message is not as expected"
-    #
-    # def test_invalid_email_error(self):
-    #     global loginpage
-    #     global topBarPage
-    #     topBarPage = TopBar(self.driver)
-    #     loginpage = topBarPage.click_login()
-    #     loginpage.fill_info("benikun88", "")
-    #     time.sleep(7)
-    #     assert loginpage.get_email_error() == "Please enter a valid email address (Ex: johndoe@domain.com).", "Password error message is not as expected"
