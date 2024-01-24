@@ -1,14 +1,8 @@
 from urllib import request
 
 import pytest
-from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-
-import os
-
 import allure
-from _pytest.fixtures import fixture
 from selenium import webdriver
 
 
@@ -29,8 +23,7 @@ def setup(request):
     driver.quit()
 
 
-def pytest_exception_interact(report, request):
-    driver = request.cls.driver
+def pytest_exception_interact(report):
     if report.failed:
         allure.attach(body=driver.get_screenshot_as_png(), name="screenshot",
                       attachment_type=allure.attachment_type.PNG)
