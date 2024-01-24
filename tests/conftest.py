@@ -21,12 +21,7 @@ def setup(request):
     options.add_argument('--start-maximized')
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    # options.add_argument("--disable-gpu")
-    # options.add_argument("--window-size=1200,1200")
-    # service = Service(executable_path='./chromedriver.exe')
-    # driver = webdriver.Chrome(service=service)
     options = webdriver.ChromeOptions()
-    # driver = webdriver.Chrome(service=service, options=options)
     driver = webdriver.Chrome(options=options)
     request.cls.driver = driver
     # driver = webdriver.Chrome()
