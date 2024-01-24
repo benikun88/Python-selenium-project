@@ -17,7 +17,7 @@ def setup(request):
     global driver
     options = Options()
     options.add_experimental_option("detach", True)
-    # options.add_argument("--headless")
+    options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     # options = webdriver.ChromeOptions()
@@ -29,7 +29,7 @@ def setup(request):
     driver.quit()
 
 
-def pytest_exception_interact(report):
+def pytest_exception_interact(report,driver):
     if report.failed:
         allure.attach(body=driver.get_screenshot_as_png(), name="screenshot",
                       attachment_type=allure.attachment_type.PNG)
