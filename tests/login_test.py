@@ -22,13 +22,21 @@ class TestLogin:
         - Valid username and valid password, expecting no errors.
         - Invalid username and empty password, expecting email error: "Please enter a valid email address (Ex: johndoe@domain.com)."
     """)
-    @pytest.mark.parametrize("username, password, expected_email_error, expected_password_error", [
-        # No error expected for valid data
-        ("benikun88@gmail.com", "1q2w3e4r!", None, None),
-        ("benikun88@gmail.com", "", None, "This is a required field."),
-        ("benikun88", "", "Please enter a valid email address (Ex: johndoe@domain.com).", None)
+    @pytest.mark.parametrize("test_data", [
+        {"username": "benikun88@gmail.com", "password": "1q2w3e4r!", "expected_email_error": None,
+         "expected_password_error": None},
+        {"username": "benikun88@gmail.com", "password": "", "expected_email_error": None,
+         "expected_password_error": "This is a required field."},
+        {"username": "benikun88", "password": "",
+         "expected_email_error": "Please enter a valid email address (Ex: johndoe@domain.com).",
+         "expected_password_error": None}
     ])
-    def test_login_with_different_data(self, setup, username, password, expected_email_error, expected_password_error):
+    def test_login_with_different_data(self, setup, test_data):
+        username = test_data["username"]
+        password = test_data["password"]
+        expected_email_error = test_data["expected_email_error"]
+        expected_password_error = test_data["expected_password_error"]
+
         top_bar_page = TopBar(self.driver)
         login_page = top_bar_page.click_login()
         login_page.fill_info(username, password)
@@ -41,4 +49,5 @@ class TestLogin:
             # Add other assertions for successful login
             assert top_bar_page.get_success_login() == "Welcome, Benjamin Kun!"
             # Add additional assertions for successful login if needed
+
 
