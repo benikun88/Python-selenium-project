@@ -21,7 +21,7 @@ def setup(request):
     options.add_argument('--start-maximized')
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    options = webdriver.ChromeOptions()
+    # options = webdriver.ChromeOptions()
     driver = webdriver.Chrome(options=options)
     request.cls.driver = driver
     # driver = webdriver.Chrome()
