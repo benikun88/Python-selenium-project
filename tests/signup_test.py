@@ -40,4 +40,4 @@ class TestSignUp:
         create_account = top_bar_page.click_create_account()
         create_account.sign_up("test", "test2", "bk88@gmail.com", "1q2w3e4r!", "1q2w3e4r!")
         time.sleep(5)
-        assert create_account.get_existing_user_error() == "There is already an account with this email address. If you are sure that it is your email address, click here to get your password and access your account"
+        assert create_account.get_existing_user_error() == "There is already an account with this email address. If you are sure that it is your email address, click here to get your password and access your account."
