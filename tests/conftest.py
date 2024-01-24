@@ -29,7 +29,8 @@ def setup(request):
     driver.quit()
 
 
-def pytest_exception_interact(report,driver):
+def pytest_exception_interact(report, request):
+    driver = request.cls.driver
     if report.failed:
         allure.attach(body=driver.get_screenshot_as_png(), name="screenshot",
                       attachment_type=allure.attachment_type.PNG)
