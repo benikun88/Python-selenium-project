@@ -1,5 +1,5 @@
 import allure
-from selenium.common import NoSuchElementException
+from selenium.common import NoSuchElementException, TimeoutException
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
@@ -70,10 +70,10 @@ class SignUpPage(BasePage):
         with allure.step("Check if page load title element is present"):
             return self.is_elements_exist(self.SING_UP_PAGE_LOAD_TITLE)
 
-    # Additional method to get the error messages for each field (if any)
+        # Additional method to get the error messages for each field (if any)
+
     @allure.step("Get field errors")
-    def get_field_errors(self):
-        errors = {}
+    def get_field_errors(self, requested_field):
         fields = {
             "first_name": self.FIRST_NAME_TEXT_BOX_ERROR,
             "last_name": self.LAST_NAME_TEXT_BOX_ERROR,
@@ -82,12 +82,22 @@ class SignUpPage(BasePage):
             "password_confirmation": self.PASSWORD_CONFIRMATION_TEXT_BOX_ERROR,
         }
 
-        for field, locator in fields.items():
-            with allure.step(f"Get {field} error"):
-                try:
-                    errors[field] = self.get_text(locator)
-                except NoSuchElementException:
-                    # Handle the case when the element is not present
-                    errors[field] = f"{field.capitalize()} element not found on the page."
+        field_locator = fields.get(requested_field)
 
-        return errors
+        if not field_locator:
+            raise ValueError(f"Invalid field requested: {requested_field}")
+
+        with allure.step(f"Get {requested_field} error"):
+            try:
+                return self.get_text(field_locator)
+            except (NoSuchElementException, TimeoutException) as e:
+                return f"Error while getting {requested_field} text: {str(e)}"
+
+    # Additional method to get the error message for an existing user or during email recovery
+    @allure.step("Get existing user error message")
+    def get_existing_user_error(self):
+        return self.get_text(self.EXITING_USER_OR_EMAIL_RECOVER_ERROR_MSG)
+
+
+def get_email_insert_error(self):
+        return self.get_text(self.EMAIL_TEXT_BOX_ERROR)
