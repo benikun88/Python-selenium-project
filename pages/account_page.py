@@ -4,6 +4,7 @@ from pages.base_page import BasePage
 
 
 class AccountPage(BasePage):
+
     # Locators for elements on the page
     EDIT_BTN = (By.CSS_SELECTOR, "div[class='box box-information'] a[class='action edit']")
     CHANGE_PASSWORD_BTN = (By.CSS_SELECTOR, "#top-cart-btn-checkout")
