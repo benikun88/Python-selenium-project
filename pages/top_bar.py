@@ -20,7 +20,7 @@ class TopBar(BasePage):
     MSG_DISSAPPER = (By.CSS_SELECTOR, "div[class='panel header'] span[class='not-logged-in']")
     SWITCH_DROP_LIST_BTN = (By.CSS_SELECTOR, "div[class='panel header'] button[type='button']")
     MY_ACCOUNT_BTN = (By.CSS_SELECTOR, "div[class='panel wrapper'] li:nth-child(1) a:nth-child(1)")
-    SIGN_OUT_BTN = (By.CSS_SELECTOR, "div[class='panel wrapper'] li:nth-child(1) a:nth-child(1)")
+    SIGN_OUT_BTN = (By.CSS_SELECTOR, "div[aria-hidden='false'] li[data-label='or'] a")
     SIGN_OUT_SUCCESS_MSG = (By.CSS_SELECTOR, ".base")
 
     def __init__(self, driver):
@@ -56,6 +56,7 @@ class TopBar(BasePage):
 
     # Clicks on the switch dropdown list button
     def click_switch_dropdown_list_my_account(self):
+        time.sleep(5)
         self.click(self.SWITCH_DROP_LIST_BTN)
 
     # Clicks on the "My Account" button
