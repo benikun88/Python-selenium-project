@@ -21,6 +21,7 @@ class TopBar(BasePage):
     SWITCH_DROP_LIST_BTN = (By.CSS_SELECTOR, "div[class='panel header'] button[type='button']")
     MY_ACCOUNT_BTN = (By.CSS_SELECTOR, "div[class='panel wrapper'] li:nth-child(1) a:nth-child(1)")
     SIGN_OUT_BTN = (By.CSS_SELECTOR, "div[class='panel wrapper'] li:nth-child(1) a:nth-child(1)")
+    SIGN_OUT_SUCCESS_MSG = (By.CSS_SELECTOR, ".base")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -54,7 +55,7 @@ class TopBar(BasePage):
         self.click(self.SEARCH_BTN)
 
     # Clicks on the switch dropdown list button
-    def click_switch_dropdown_list(self):
+    def click_switch_dropdown_list_my_account(self):
         self.click(self.SWITCH_DROP_LIST_BTN)
 
     # Clicks on the "My Account" button
@@ -73,3 +74,7 @@ class TopBar(BasePage):
         # Click on the search button to initiate the search.
         self.click(self.SEARCH_TEXT_BOX)
         return SearchPage(self.driver)
+
+    def get_success_logout_msg(self):
+        # Click on the search button to initiate the search.
+        return self.get_text(self.SIGN_OUT_SUCCESS_MSG)

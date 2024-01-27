@@ -16,6 +16,7 @@ class LoginPage(BasePage):
     PASSWORD_FIELD_ERROR = (By.CSS_SELECTOR, "#pass-error")
     WRONG_SIGNIN_ERROR = (By.CSS_SELECTOR, ".message-error.error.message")
     MY_ACCOUNT_BTN = (By.CSS_SELECTOR, "div[class='panel header'] li[class='greet welcome']")
+    FORGOT_PASSWORD_BTN = (By.CSS_SELECTOR, "a[class='action remind'] span")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -47,3 +48,6 @@ class LoginPage(BasePage):
     @allure.step("Check if LoginPage is loaded")
     def is_page_loaded(self):
         return self.is_elements_exist(self.LOGIN_PAGE_LOAD_TITLE)
+    @allure.step("enter to forgot password")
+    def click_forgot_password(self):
+        return self.click(self.FORGOT_PASSWORD_BTN)
