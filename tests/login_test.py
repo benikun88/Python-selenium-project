@@ -57,7 +57,7 @@ class TestLogin:
         # login_page = top_bar_page.click_login()
         login_page.fill_info(username, password)
         if top_bar_page.get_success_login() == "Welcome, Benjamin Kun!":
-            webdriver.Chrome.refresh(self.driver)
+            self.driver.refresh()(self.driver)
             assert top_bar_page.get_success_login() == "Welcome, Benjamin Kun!"
         else:
             assert top_bar_page.get_success_login() == "Welcome, Benjamin Kun!"
@@ -76,3 +76,7 @@ class TestLogin:
     # Sign in- password recovery tests
     def test_password_recovery(self):
         login_page.click_forgot_password()
+        login_page.fill_email_address_reset("Benikun88@gmail.com")
+        login_page.click_reset_password()
+        assert login_page.get_reset_msg_process() == "If there is an account associated with Benikun88@gmail.com you will receive an email with a link to reset your password."
+

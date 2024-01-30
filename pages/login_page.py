@@ -17,6 +17,9 @@ class LoginPage(BasePage):
     WRONG_SIGNIN_ERROR = (By.CSS_SELECTOR, ".message-error.error.message")
     MY_ACCOUNT_BTN = (By.CSS_SELECTOR, "div[class='panel header'] li[class='greet welcome']")
     FORGOT_PASSWORD_BTN = (By.CSS_SELECTOR, "a[class='action remind'] span")
+    RESET_MY_PASSWORD_BTN = (By.CSS_SELECTOR, ".action.submit.primary")
+    EMAIL_RESET_FIELD = (By.CSS_SELECTOR, "#email_address")
+    ACCOUNT_ASSOCIATED_INFO_MSG = (By.CSS_SELECTOR, ".message-success.success.message div")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -48,6 +51,19 @@ class LoginPage(BasePage):
     @allure.step("Check if LoginPage is loaded")
     def is_page_loaded(self):
         return self.is_elements_exist(self.LOGIN_PAGE_LOAD_TITLE)
+
     @allure.step("enter to forgot password")
     def click_forgot_password(self):
-        return self.click(self.FORGOT_PASSWORD_BTN)
+        self.click(self.FORGOT_PASSWORD_BTN)
+
+    @allure.step("fill the email address")
+    def fill_email_address_reset(self, email_recover):
+        self.fill_text(self.EMAIL_RESET_FIELD, email_recover)
+
+    @allure.step("click on reset password")
+    def click_reset_password(self):
+        self.click(self.RESET_MY_PASSWORD_BTN)
+
+    @allure.step("MSG of the reset process")
+    def get_reset_msg_process(self):
+        return self.get_text(self.ACCOUNT_ASSOCIATED_INFO_MSG)
