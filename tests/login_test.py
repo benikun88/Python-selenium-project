@@ -79,4 +79,3 @@ class TestLogin:
         login_page.fill_email_address_reset("Benikun88@gmail.com")
         login_page.click_reset_password()
         assert login_page.get_reset_msg_process() == "If there is an account associated with Benikun88@gmail.com you will receive an email with a link to reset your password."
-
