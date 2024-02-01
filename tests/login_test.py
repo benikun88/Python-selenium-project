@@ -57,7 +57,7 @@ class TestLogin:
         # login_page = top_bar_page.click_login()
         login_page.fill_info(username, password)
         if top_bar_page.get_success_login() == "Welcome, Benjamin Kun!":
-            self.driver.refresh()(self.driver)
+            self.driver.refresh()
             assert top_bar_page.get_success_login() == "Welcome, Benjamin Kun!"
         else:
             assert top_bar_page.get_success_login() == "Welcome, Benjamin Kun!"
