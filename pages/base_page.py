@@ -83,3 +83,15 @@ class BasePage:
     def navigate_to(self, url):
         """Navigate to a specific URL."""
         self.driver.get(url)
+
+    def find_elements(self, locator, timeout=10):
+        """
+        Find multiple elements based on locator.
+        Args:
+            locator (tuple): Locator strategy and value (e.g., (By.ID, "myId")).
+            timeout (int): Maximum time to wait for the elements to be present (default is 10 seconds).
+
+        Returns:
+            list: A list of web elements matching the given locator.
+        """
+        return self.wait_for_elements_visibility(*locator)
