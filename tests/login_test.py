@@ -12,6 +12,7 @@ from pages.top_bar import TopBar
 class TestLogin:
     @pytest.fixture
     # pre steps before starting each test
+
     def setup_login_test(self):
         global top_bar_page
         global login_page
