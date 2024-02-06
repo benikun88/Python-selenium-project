@@ -14,6 +14,7 @@ class TopBar(BasePage):
     CREATE_ACCOUNT_BTN = (By.XPATH, "//div[@class='panel header']//a[normalize-space()='Create an Account']")
     CART_ICON_BTN = (By.CSS_SELECTOR, ".action.showcart")
     CART_COUNTER = (By.CSS_SELECTOR, ".counter-number")
+    EMPTY_CART_MSG = (By.CSS_SELECTOR, ".subtitle.empty")
     SEARCH_TEXT_BOX = (By.CSS_SELECTOR, "#search")
     SEARCH_BTN = (By.CSS_SELECTOR, "button[title='Search']")
     TOP_BAR_ITEMS = (By.CSS_SELECTOR, ".level-top.ui-corner-all")
@@ -110,3 +111,9 @@ class TopBar(BasePage):
     @allure.step("Check if the search bar is visible")
     def is_search_bar_visible(self):
         return self.is_elements_exist(self.SEARCH_TEXT_BOX)
+
+    def get_cart_empty_msg(self):
+        return self.get_text(self.EMPTY_CART_MSG)
+
+    def get_cart_icon_Qty(self):
+        return self.get_text(self.CART_COUNTER)
