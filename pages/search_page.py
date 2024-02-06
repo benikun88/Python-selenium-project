@@ -14,22 +14,19 @@ class SearchPage(BasePage):
     # Locators for elements on the page
     PRODUCT_NAME = (By.CSS_SELECTOR, ".product-item-link")
     NO_ITEM_RESULTS_IN_SERACH_MSG = (By.CSS_SELECTOR, ".message.notice")
-    SEARCH_RESULT_PAGE_TITLE = (By.CSS_SELECTOR, "span[id='product-price-1812'] span[class='price']")
+    SEARCH_RESULT_PAGE_TITLE = (By.CSS_SELECTOR, ".base")
 
     def __init__(self, driver):
         super().__init__(driver)
 
+    def get_product_names(self):
+        # Get the names of products listed on the search page.
+        return self.get_text(self.PRODUCT_NAME)
 
-def get_product_names(self):
-    # Get the names of products listed on the search page.
-    return self.gettext(self.PRODUCT_NAME)
+    def get_no_item_results_message(self):
+        # Get the message displayed when there are no search results.
+        return self.get_text(self.NO_ITEM_RESULTS_IN_SERACH_MSG)
 
-
-def get_no_item_results_message(self):
-    # Get the message displayed when there are no search results.
-    return self.gettext(self.NO_ITEM_RESULTS_IN_SEARCH_MSG)
-
-
-def get_search_result_page_title(self):
-    # Get the title of the search result page.
-    return self.gettext(self.SEARCH_RESULT_PAGE_TITLE)
+    def get_search_result_page_title(self):
+        # Get the title of the search result page.
+        return self.get_text(self.SEARCH_RESULT_PAGE_TITLE)
