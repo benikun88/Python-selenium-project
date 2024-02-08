@@ -3,6 +3,7 @@ from pages.base_page import BasePage
 from pages.cart_page import CartPage
 import time
 
+
 class MiniCartPage(BasePage):
     # Locator for the close button in the mini cart
     CLOSE_MINI_CART_BTN = (By.CSS_SELECTOR, "#btn-minicart-close")

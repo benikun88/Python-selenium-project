@@ -121,4 +121,3 @@ class TopBar(BasePage):
     def get_cart_icon_qty(self):
         self.wait_for_element_invisibility(*self.CART_LOADING)
         return self.get_text(self.CART_COUNTER)
-
