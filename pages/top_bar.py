@@ -13,7 +13,9 @@ class TopBar(BasePage):
     CLICK_LOGIN = (By.CSS_SELECTOR, "div[class='panel header'] li[data-label='or'] a")
     CREATE_ACCOUNT_BTN = (By.XPATH, "//div[@class='panel header']//a[normalize-space()='Create an Account']")
     CART_ICON_BTN = (By.CSS_SELECTOR, ".action.showcart")
+    CART_LOADING = (By.CSS_SELECTOR, "._block-content-loading")
     CART_COUNTER = (By.CSS_SELECTOR, ".counter-number")
+    CART_COUNTER_EMPTY = (By.CSS_SELECTOR, ".counter.qty.empty .counter-number")
     EMPTY_CART_MSG = (By.CSS_SELECTOR, ".subtitle.empty")
     SEARCH_TEXT_BOX = (By.CSS_SELECTOR, "#search")
     SEARCH_BTN = (By.CSS_SELECTOR, "button[title='Search']")
@@ -57,6 +59,7 @@ class TopBar(BasePage):
     # Clicks on the shopping cart icon
     @allure.step("Click on the shopping cart icon")
     def click_cart_icon(self):
+        self.wait_for_element_invisibility(*self.CART_LOADING)
         self.click(self.CART_ICON_BTN)
 
     # Enters a search query in the search text box and clicks the search button
@@ -115,5 +118,7 @@ class TopBar(BasePage):
     def get_cart_empty_msg(self):
         return self.get_text(self.EMPTY_CART_MSG)
 
-    def get_cart_icon_Qty(self):
+    def get_cart_icon_qty(self):
+        self.wait_for_element_invisibility(*self.CART_LOADING)
         return self.get_text(self.CART_COUNTER)
+

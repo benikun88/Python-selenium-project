@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from pages.cart_page import CartPage
+import time
 
 class MiniCartPage(BasePage):
     # Locator for the close button in the mini cart
@@ -14,6 +15,7 @@ class MiniCartPage(BasePage):
         By.CSS_SELECTOR, ".minicart-items .item.product.product-item .product-item-details .product-item-name")
     EDIT_ITEM = (By.CSS_SELECTOR, "a[title='Edit item']")
     REMOVE_ITEM = (By.CSS_SELECTOR, "a[title='Remove item']")
+    APPROVE_REMOVE_ITEM = (By.CSS_SELECTOR, ".action-primary.action-accept")
     ITEM_DETAILS = (By.CSS_SELECTOR, "span[role='tab']")
     NUMBER_OF_ITEMS_IN_CART = (By.CSS_SELECTOR, ".count")
     MINI_CART_CLOSE_BTN = (By.CSS_SELECTOR, "#btn-minicart-close")
@@ -50,6 +52,8 @@ class MiniCartPage(BasePage):
     # Removes an item from the mini cart
     def remove_item(self):
         self.click(self.REMOVE_ITEM)
+        self.click(self.APPROVE_REMOVE_ITEM)
+        time.sleep(5)
 
     # Views the cart in the mini cart (Note: The method name suggests removing an item, but the code clicks the remove item button)
     def view_cart(self):

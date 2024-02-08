@@ -48,6 +48,9 @@ class BasePage:
     def get_text(self, locator) -> str:
         el: WebElement = self.wait_for_element_visibility(*locator)
         return el.text
+    def get_text_not_visiable(self, locator) -> str:
+        el: WebElement = self.wait_for_element_presence(*locator)
+        return el.text
 
     def hover(self, locator) -> str:
         el: WebElement = self.wait_for_element_visibility(*locator)
@@ -79,6 +82,17 @@ class BasePage:
             return element.is_displayed()
         except WebDriverException as e:
             return False
+
+    def is_elements_dont_exist(self, locator):
+        try:
+            element_visibility = self.wait_for_element_invisibility(*locator)
+            # If the element is not found, wait_for_element_invisibility returns True
+            if element_visibility:
+                return True  # Element doesn't exist
+            # If the element is found, return False
+            return not self.find_element(*locator).is_displayed()
+        except WebDriverException as e:
+            return False  # Exception occurred, return False
 
     def navigate_to(self, url):
         """Navigate to a specific URL."""
