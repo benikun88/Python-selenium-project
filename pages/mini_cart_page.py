@@ -63,3 +63,10 @@ class MiniCartPage(BasePage):
     # Clicks the "Close Mini Cart" button
     def close_mini_cart(self):
         self.click(self.CLOSE_MINI_CART_BTN)
+
+    def convert_price_to_float(self, price_str):
+        """
+        Convert a price string to a floating-point number.
+        Assumes the price string is formatted as '$xxx.xx'.
+        """
+        return float(price_str.replace('$', ''))

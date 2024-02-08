@@ -50,7 +50,18 @@ class TestCart:
         product_page.choose_product_color("Black")
         product_page.set_product_quantity("5")
         product_page.click_add_to_cart()
+
         mini_cart = MiniCartPage(self.driver)
         top_bar.click_cart_icon()
-        price = int(mini_cart.get_item_price()) * 5
-        assert price == mini_cart.get_subtotal_price()
+
+        # Extract numerical part of the item price
+        item_price_str = mini_cart.get_item_price()
+        item_price = mini_cart.convert_price_to_float(item_price_str)
+
+        price = int(item_price) * 5
+
+        # Convert subtotal price to numerical value
+        subtotal_price_str = mini_cart.get_subtotal_price()
+        subtotal_price = mini_cart.convert_price_to_float(subtotal_price_str)
+
+        assert price == subtotal_price
