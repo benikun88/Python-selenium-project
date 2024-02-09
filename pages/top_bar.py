@@ -66,6 +66,7 @@ class TopBar(BasePage):
     @allure.step("Search for item: {search_query}")
     def search_for_item(self, search_query):
         self.fill_text(self.SEARCH_TEXT_BOX, search_query)
+        self.fill_text_without_clean(self.SEARCH_TEXT_BOX,"")
         self.click(self.SEARCH_BTN)
 
     # Clicks on the switch dropdown list button

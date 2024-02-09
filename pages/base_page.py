@@ -1,5 +1,5 @@
 from selenium.common import WebDriverException
-from selenium.webdriver import ActionChains
+from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC, expected_conditions
@@ -45,9 +45,16 @@ class BasePage:
         el.clear()
         el.send_keys(txt)
 
+    def fill_text_without_clean(self, locator, txt: str) -> None:
+        el: WebElement = self.wait_for_element_clickable(*locator)
+        self.wait_for_element_visibility(*locator)
+        self.driver.execute_script("arguments[0].setAttribute('style', 'border: 1px solid blue;');", el)
+        el.send_keys(Keys.SPACE)
+
     def get_text(self, locator) -> str:
         el: WebElement = self.wait_for_element_visibility(*locator)
         return el.text
+
     def get_text_not_visiable(self, locator) -> str:
         el: WebElement = self.wait_for_element_presence(*locator)
         return el.text
