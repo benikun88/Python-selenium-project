@@ -58,7 +58,7 @@ class MiniCartPage(BasePage):
 
     # Views the cart in the mini cart (Note: The method name suggests removing an item, but the code clicks the remove item button)
     def view_cart(self):
-        self.click(self.REMOVE_ITEM)
+        self.click(self.VIEW_EDIT_BTN)
 
     # Clicks the "Close Mini Cart" button
     def close_mini_cart(self):

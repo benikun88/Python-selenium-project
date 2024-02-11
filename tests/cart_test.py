@@ -65,3 +65,25 @@ class TestCart:
         subtotal_price = mini_cart.convert_price_to_float(subtotal_price_str)
 
         assert price == subtotal_price
+
+    def test_navigate_from_mini_cart_to_cart(self):
+        top_bar = TopBar(self.driver)
+        product_page = ProductPage(self.driver)
+        product_page.driver.get("https://magento.softwaretestingboard.com/olivia-1-4-zip-light-jacket.html#")
+        product_page.choose_product_size("S")
+        product_page.choose_product_color("Black")
+        product_page.click_add_to_cart()
+        top_bar.click_cart_icon()
+        mini_cart = MiniCartPage(self.driver)
+        mini_cart.view_cart()
+        cart_page = CartPage(self.driver)
+        assert cart_page.is_page_loaded() == True
+
+    def test_qty_error(self):
+        top_bar = TopBar(self.driver)
+        product_page = ProductPage(self.driver)
+        product_page.driver.get("https://magento.softwaretestingboard.com/aim-analog-watch.html#")
+        product_page.set_product_quantity("9999")
+        product_page.click_add_to_cart()
+        cart_page = CartPage(self.driver)
+        assert cart_page.get_error_cart_msg() == "The requested qty is not available"

@@ -5,7 +5,7 @@ from configs import config_login
 from pages.login_page import LoginPage
 from pages.top_bar import TopBar
 
-
+@pytest.mark.usefixtures("setup")
 @pytest.mark.usefixtures("setup_login_test")
 class TestLogin:
     @pytest.fixture

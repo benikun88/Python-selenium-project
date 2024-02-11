@@ -23,8 +23,9 @@ class CartPage(BasePage):
     APPLY_DISCOUNT_BTN = (By.CSS_SELECTOR, "button[value='Apply Discount'] span")
     CANCEL_DISCOUNT_COUPON_BTN = (By.CSS_SELECTOR, "button[value='Cancel'] span span")
     DISCOUNT_COUPON_SUCCSES_MSG = (
-    By.CSS_SELECTOR, "div[data-ui-id='checkout-cart-validationmessages-message-success']")
+        By.CSS_SELECTOR, "div[data-ui-id='checkout-cart-validationmessages-message-success']")
     DISCOUNT_COUPON_ERROR_MSG = (By.CSS_SELECTOR, "div[data-ui-id='checkout-cart-validationmessages-message-error']")
+    CART_ERROR_MSG = (By.CSS_SELECTOR, ".message-error.error.message")
 
     # discount code is 20poff
     def __init__(self, driver):
@@ -80,3 +81,6 @@ class CartPage(BasePage):
     # Checks if the success message for applying a discount code is visible
     def discount_code_msg(self):
         return self.get_text(self.DISCOUNT_COUPON_SUCCSES_MSG)
+
+    def get_error_cart_msg(self):
+        return self.get_text(self.CART_ERROR_MSG)
