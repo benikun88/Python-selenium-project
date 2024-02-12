@@ -1,3 +1,5 @@
+import time
+
 from pages.cart_page import CartPage
 from pages.mini_cart_page import MiniCartPage
 from pages.product_page import ProductPage
@@ -6,6 +8,7 @@ from pages.top_bar import TopBar
 
 class TestCart:
     def test_initial_cart_state(self):
+        time.sleep(2)
         top_bar = TopBar(self.driver)
         top_bar.click_cart_icon()
         assert top_bar.get_cart_empty_msg() == "You have no items in your shopping cart."
