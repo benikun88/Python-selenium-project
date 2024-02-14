@@ -2,6 +2,8 @@
 # Product description, including details like size, color, and material.
 # Price and available sizes.
 # Add to cart and buy now options.
+import time
+
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 
@@ -51,6 +53,7 @@ class ProductPage(BasePage):
     def click_add_to_cart(self):
         # Click the 'Add to Cart' button.
         self.click(self.ADD_TO_CART_BTN)
+        time.sleep(1)
 
     def get_chosen_size(self):
         # Get the text of the chosen size element.

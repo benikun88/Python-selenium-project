@@ -6,7 +6,6 @@ class TestTopBar:
         top_bar = TopBar(self.driver)
         assert top_bar.is_logo_visible(), "The site logo is not present or visible."
 
-
     def test_top_bar_persists(self):
         top_bar = TopBar(self.driver)
         pages_to_visit = ["/customer/account/login", "/customer/account/create/", "/sale.html"]
