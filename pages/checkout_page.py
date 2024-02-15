@@ -22,13 +22,21 @@ class CheckoutPage(BasePage):
     NEXT_BTN = (By.CSS_SELECTOR, ".button.action.continue.primary")
     PLACE_ORDER_BTN = (By.CSS_SELECTOR, "button[title='Place Order']")
     REVEL_DISCOUNT_CODE_BTN = (By.CSS_SELECTOR, "#block-discount-heading")
-    DISCOUNT_CODE_TEXT_BOX = (By.CSS_SELECTOR, "#discount-code")
+    DISCOUNT_CODE_FIELD = (By.CSS_SELECTOR, "#discount-code")
     APPLY_DISCOUNT_BTN = (By.CSS_SELECTOR, "button[value='Apply Discount'] span")
     CANCEL_DISCOUNT_COUPON_BTN = (By.CSS_SELECTOR, "button[value='Cancel'] span span")
-    DISCOUNT_COUPON_SUCCSES_MSG = (
-        By.CSS_SELECTOR, "div[data-ui-id='checkout-cart-validationmessages-message-success']")
+    DISCOUNT_COUPON_MSG = (By.CSS_SELECTOR, "div[role='alert']")
     DISCOUNT_COUPON_ERROR_MSG = (By.CSS_SELECTOR, "div[data-ui-id='checkout-cart-validationmessages-message-error']")
     CHECKOUT_PAGE_LOADER = (By.CSS_SELECTOR, "img[alt='Loading...']")
+    # account creation
+    EMAIL_ADDRESS_ANONYMOUS_FIELD = (By.CSS_SELECTOR, ".control._with-tooltip #customer-email")
+    ACCOUNT_EXISTING_NOTIFICATION = (By.CSS_SELECTOR, "div[class='control'] span[class='note']")
+    COSTUMER_PASSWORD_FROM_ADDRESS_FIELD = (By.CSS_SELECTOR, "#customer-password")
+    LOGIN_BTN = (By.CSS_SELECTOR, ".action.login.primary")
+    SIGNIN_FROM_CHECKOUT_BTN = (By.CSS_SELECTOR, "button[class='action action-auth-toggle'] span")
+    EMAIL_ADDRESS_SIGNIN_FROM_CHECKOUT_FIELD= (By.CSS_SELECTOR, "#login-email")
+    PASSWORD_SIGNIN_FROM_CHECKOUT_FIELD= (By.CSS_SELECTOR, "#login-password")
+
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -74,16 +82,17 @@ class CheckoutPage(BasePage):
 
     @allure.step("Apply a discount code: {discount_code}")
     def apply_discount_code(self, discount_code):
-        self.fill_text(self.DISCOUNT_CODE_TEXT_BOX, discount_code)
+        self.fill_text(self.DISCOUNT_CODE_FIELD, discount_code)
         self.click(self.APPLY_DISCOUNT_BTN)
 
     @allure.step("Cancel the applied discount code")
     def cancel_discount_code(self):
+        self.wait_for_element_invisibility(*self.CHECKOUT_PAGE_LOADER)
         self.click(self.CANCEL_DISCOUNT_COUPON_BTN)
 
     @allure.step("Check if the discount code is applied successfully")
     def is_discount_code_applied_successfully(self):
-        return self.is_elements_exist(self.DISCOUNT_COUPON_SUCCSES_MSG)
+        return self.get_text(self.DISCOUNT_COUPON_MSG)
 
     @allure.step("Convert price string to float: {price_str}")
     def convert_price_to_float(self, price_str):
@@ -108,3 +117,27 @@ class CheckoutPage(BasePage):
     def get_discount_amount(self):
         self.wait_for_element_invisibility(*self.CHECKOUT_PAGE_LOADER)
         return self.get_text(self.DISCOUNT_PRICE)
+
+    @allure.step("Fill email address field for anonymous account creation")
+    def fill_anonymous_email_address(self, email_address):
+        self.fill_text(self.EMAIL_ADDRESS_ANONYMOUS_FIELD, email_address)
+
+    @allure.step("Fill password field for anonymous account creation")
+    def fill_customer_password(self, password):
+        self.fill_text(self.COSTUMER_PASSWORD_FROM_ADDRESS_FIELD, password)
+
+    @allure.step("Click on the login button")
+    def click_login_button(self):
+        self.click(self.LOGIN_BTN)
+
+    @allure.step("Click on the Sign-in from checkout button")
+    def click_signin_from_checkout_button(self):
+        self.click(self.SIGNIN_FROM_CHECKOUT_BTN)
+
+    @allure.step("Fill email address field for sign-in from checkout")
+    def fill_email_address_signin_from_checkout(self, email_address):
+        self.fill_text(self.EMAIL_ADDRESS_SIGNIN_FROM_CHECKOUT_FIELD, email_address)
+
+    @allure.step("Fill password field for sign-in from checkout")
+    def fill_password_signin_from_checkout(self, password):
+        self.fill_text(self.PASSWORD_SIGNIN_FROM_CHECKOUT_FIELD, password)

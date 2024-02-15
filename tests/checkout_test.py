@@ -1,59 +1,88 @@
+# Import necessary statements
 import pytest
 from selenium import webdriver
-from configs import config_login
+from selenium.common import NoSuchElementException
+
+from configs import config_login, config_checkout
 from pages.checkout_page import CheckoutPage
 from pages.login_page import LoginPage
 from pages.mini_cart_page import MiniCartPage
 from pages.product_page import ProductPage
 from pages.top_bar import TopBar
+import allure
 
 
-@pytest.mark.usefixtures("setup")
+# Test class definition
+@allure.feature("Checkout")
 class TestCheckout:
+    # Fixture for setup and teardown
     @pytest.fixture(autouse=True)
     def setup_checkout_test(self):
+        """
+        Setup fixture for checkout tests.
+        """
+        # Setup steps
         top_bar_page = TopBar(self.driver)
         login_page = top_bar_page.click_login()
         login_page.fill_info(config_login.VALID_USERNAME, config_login.VALID_PASSWORD)
-        product_page = ProductPage(self.driver)
-        product_page.driver.get("https://magento.softwaretestingboard.com/olivia-1-4-zip-light-jacket.html#")
-        product_page.choose_product_size("S")
-        product_page.choose_product_color("Black")
-        product_page.click_add_to_cart()
-        top_bar = TopBar(self.driver)
-        top_bar.click_cart_icon()
+        top_bar_page.click_cart_icon()
         mini_cart = MiniCartPage(self.driver)
+        try:
+            mini_cart.remove_item()
+        except NoSuchElementException:
+            # Handle the case where the element is not found
+            print("Element not found!")
+        product_page = ProductPage(self.driver)
+        product_page.driver.get(config_checkout.URL_ITEM_TO_ADD)
+        product_page.choose_product_size(config_checkout.SIZE)
+        product_page.choose_product_color(config_checkout.COLOR)
+        product_page.click_add_to_cart()
+        top_bar_page.click_cart_icon()
         mini_cart.click_proceed_checkout()
         yield
-        top_bar.driver.get("https://magento.softwaretestingboard.com/")
-        top_bar.click_cart_icon()
+        # Teardown steps
+        top_bar_page.driver.get("https://magento.softwaretestingboard.com/")
+        top_bar_page.click_cart_icon()
         mini_cart.remove_item()
 
+    # Test to apply discount code
+    @allure.description("Test to apply discount code and verify the result.")
+    @pytest.mark.parametrize("discount_code, expected_message", [
+        (config_checkout.VALID_DISCOUNT_CODE, config_checkout.EXPECTED_SUCCESS_APPLY_CODE),
+        (config_checkout.INVALID_DISCOUNT_CODE, config_checkout.EXPECTED_ERROR_INVALID_CODE),
+    ])
+    def test_apply_discount_code(self, discount_code, expected_message):
+        checkout_page = CheckoutPage(self.driver)
+        checkout_page.click_next_button()
+        checkout_page.reveal_discount_code_section()
+        checkout_page.apply_discount_code(discount_code)
+        assert checkout_page.is_discount_code_applied_successfully() == expected_message
+
+    # Test for discount price calculation
+    @allure.description("Test to calculate the discounted price after applying a discount code.")
+    def test_discount_price_calculation(self):
+        checkout_page = CheckoutPage(self.driver)
+        checkout_page.click_next_button()
+        item_price_str = checkout_page.get_total_price()
+        item_price = checkout_page.convert_price_to_float(item_price_str)
+        item_price_discounted = item_price * -0.2
+        checkout_page.reveal_discount_code_section()
+        checkout_page.apply_discount_code(config_checkout.VALID_DISCOUNT_CODE)
+        discount_price = checkout_page.convert_price_to_float(checkout_page.get_discount_amount())
+        assert discount_price == item_price_discounted
+
+    # Test to remove discount code
+    @allure.description("Test to remove a discount code and verify the result.")
+    def test_remove_discount_code(self):
+        checkout_page = CheckoutPage(self.driver)
+        checkout_page.click_next_button()
+        checkout_page.reveal_discount_code_section()
+        checkout_page.apply_discount_code(config_checkout.VALID_DISCOUNT_CODE)
+        checkout_page.cancel_discount_code()
+        assert checkout_page.is_discount_code_applied_successfully() == config_checkout.EXPECTED_SUCCESS_REMOVE_CODE
+
+    # Test to check if shipping address section exists
+    @allure.description("Test to verify if the shipping address section exists.")
     def test_address_loaded(self):
         checkout_page = CheckoutPage(self.driver)
         assert checkout_page.is_shipping_address_section_exist()
-
-    def test_discount_valid_code(self):
-        checkout_page = CheckoutPage(self.driver)
-        checkout_page.click_next_button()
-        item_price_str = checkout_page.get_total_price()
-        item_price = checkout_page.convert_price_to_float(item_price_str)
-        print(item_price)
-        item_price_discounted = item_price * -0.2
-        checkout_page.reveal_discount_code_section()
-        checkout_page.apply_discount_code("20poff")
-        discount_price=checkout_page.convert_price_to_float(checkout_page.get_discount_amount())
-        assert discount_price == item_price_discounted
-
-    def test_discount_valid_code(self):
-        checkout_page = CheckoutPage(self.driver)
-        checkout_page.click_next_button()
-        item_price_str = checkout_page.get_total_price()
-        item_price = checkout_page.convert_price_to_float(item_price_str)
-        print(item_price)
-        item_price_discounted = item_price * -0.2
-        checkout_page.reveal_discount_code_section()
-        checkout_page.apply_discount_code("20poff")
-        discount_price=checkout_page.convert_price_to_float(checkout_page.get_discount_amount())
-        assert discount_price == item_price_discounted
-

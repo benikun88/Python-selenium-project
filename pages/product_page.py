@@ -53,7 +53,7 @@ class ProductPage(BasePage):
     def click_add_to_cart(self):
         # Click the 'Add to Cart' button.
         self.click(self.ADD_TO_CART_BTN)
-        time.sleep(1)
+        time.sleep(2)
 
     def get_chosen_size(self):
         # Get the text of the chosen size element.

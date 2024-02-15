@@ -5,10 +5,10 @@ from configs import config_login
 from pages.login_page import LoginPage
 from pages.top_bar import TopBar
 
-@pytest.mark.usefixtures("setup")
-@pytest.mark.usefixtures("setup_login_test")
+
+@allure.feature("Login")
 class TestLogin:
-    @pytest.fixture
+    @pytest.fixture(autouse=True)
     # pre steps before starting each test
     def setup_login_test(self):
         global top_bar_page
