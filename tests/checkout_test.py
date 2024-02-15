@@ -33,7 +33,7 @@ class TestCheckout:
         checkout_page = CheckoutPage(self.driver)
         assert checkout_page.is_shipping_address_section_exist()
 
-    def test_discount(self):
+    def test_discount_valid_code(self):
         checkout_page = CheckoutPage(self.driver)
         checkout_page.click_next_button()
         item_price_str = checkout_page.get_total_price()
@@ -44,3 +44,16 @@ class TestCheckout:
         checkout_page.apply_discount_code("20poff")
         discount_price=checkout_page.convert_price_to_float(checkout_page.get_discount_amount())
         assert discount_price == item_price_discounted
+
+    def test_discount_valid_code(self):
+        checkout_page = CheckoutPage(self.driver)
+        checkout_page.click_next_button()
+        item_price_str = checkout_page.get_total_price()
+        item_price = checkout_page.convert_price_to_float(item_price_str)
+        print(item_price)
+        item_price_discounted = item_price * -0.2
+        checkout_page.reveal_discount_code_section()
+        checkout_page.apply_discount_code("20poff")
+        discount_price=checkout_page.convert_price_to_float(checkout_page.get_discount_amount())
+        assert discount_price == item_price_discounted
+
