@@ -1,10 +1,8 @@
 # Import necessary statements
 import time
-
 import pytest
 from selenium import webdriver
 from selenium.common import NoSuchElementException, WebDriverException
-
 from configs import config_login, config_checkout
 from pages.checkout_page import CheckoutPage
 from pages.login_page import LoginPage

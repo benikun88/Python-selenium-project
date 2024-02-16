@@ -5,6 +5,7 @@ from configs import config_signup
 from pages.top_bar import TopBar
 
 
+@allure.feature("SignUp")
 class TestSignUp:
     @allure.description("""
         Test successful user signup.
@@ -35,7 +36,8 @@ class TestSignUp:
     def test_existing_user_signup(self):
         top_bar_page = TopBar(self.driver)
         create_account = top_bar_page.click_create_account()
-        create_account.sign_up(config_signup.VALID_FIRST_NAME, config_signup.VALID_LAST_NAME, config_signup.EXISTING_EMAIL,
+        create_account.sign_up(config_signup.VALID_FIRST_NAME, config_signup.VALID_LAST_NAME,
+                               config_signup.EXISTING_EMAIL,
                                config_signup.VALID_PASSWORD, config_signup.VALID_PASSWORD)
         time.sleep(5)
         assert create_account.get_existing_user_error() == config_signup.EXISTING_USER_ERROR_MESSAGE
@@ -53,7 +55,8 @@ class TestSignUp:
         create_account = top_bar_page.click_create_account()
 
         # Fill in the signup form with invalid email
-        create_account.sign_up(config_signup.VALID_FIRST_NAME, config_signup.VALID_LAST_NAME, config_signup.INVALID_EMAIL,
+        create_account.sign_up(config_signup.VALID_FIRST_NAME, config_signup.VALID_LAST_NAME,
+                               config_signup.INVALID_EMAIL,
                                config_signup.VALID_PASSWORD, config_signup.VALID_PASSWORD)
         # Verify the error message for the email field
         error_message = create_account.get_field_errors("email")

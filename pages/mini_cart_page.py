@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from pages.cart_page import CartPage
@@ -29,44 +30,50 @@ class MiniCartPage(BasePage):
         super().__init__(driver)
 
     # Clicks the "Proceed to Checkout" button in the mini cart and returns a new CartPage instance
+    @allure.step("Click 'Proceed to Checkout' button in the mini cart")
     def click_proceed_checkout(self):
         self.click(self.PROCEED_TO_CHECKOUT_BTN)
         return CartPage(self.driver)
 
     # Retrieves the item price from the mini cart
+    @allure.step("Get item price from the mini cart")
     def get_item_price(self):
         return self.get_text(self.CART_ITEM_PRICE)
 
     # Retrieves the subtotal price from the mini cart
+    @allure.step("Get subtotal price from the mini cart")
     def get_subtotal_price(self):
         return self.get_text(self.CART_SUBTOTAL_PRICE)
 
     # Retrieves the empty cart message from the mini cart
+    @allure.step("Get empty cart message from the mini cart")
     def get_cart_empty_msg(self):
         return self.get_text(self.EMPTY_CART_MSG)
 
     # Fills the quantity in the mini cart and updates it
+    @allure.step("Fill quantity in the mini cart and update it")
     def fill_quantity(self):
         self.fill_text(self.QTY_TEXTBOX)
         self.click(self.UPDATE_BTN)
 
     # Removes an item from the mini cart
+    @allure.step("Remove an item from the mini cart")
     def remove_item(self):
         self.click(self.REMOVE_ITEM)
         self.click(self.APPROVE_REMOVE_ITEM)
         time.sleep(5)
 
     # Views the cart in the mini cart (Note: The method name suggests removing an item, but the code clicks the remove item button)
+    @allure.step("View the cart in the mini cart")
     def view_cart(self):
         self.click(self.VIEW_EDIT_BTN)
 
     # Clicks the "Close Mini Cart" button
+    @allure.step("Click 'Close Mini Cart' button")
     def close_mini_cart(self):
         self.click(self.CLOSE_MINI_CART_BTN)
 
+    # Converts a price string to a floating-point number
+    @allure.step("Converts a price string to a floating-point number")
     def convert_price_to_float(self, price_str):
-        """
-        Convert a price string to a floating-point number.
-        Assumes the price string is formatted as '$xxx.xx'.
-        """
         return float(price_str.replace('$', ''))

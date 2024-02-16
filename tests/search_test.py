@@ -1,9 +1,11 @@
+import allure
 import pytest
 
 from pages.search_page import SearchPage
 from pages.top_bar import TopBar
 
 
+@allure.feature("SignUp")
 class TestSearch:
 
     @pytest.mark.parametrize("query, expected_title, expected_message", [
