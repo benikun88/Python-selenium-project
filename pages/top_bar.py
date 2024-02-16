@@ -67,6 +67,7 @@ class TopBar(BasePage):
     def search_for_item(self, search_query):
         self.fill_text(self.SEARCH_TEXT_BOX, search_query)
         self.fill_text_without_clean(self.SEARCH_TEXT_BOX,"")
+        self.wait_for_element_visibility(*self.SEARCH_BTN)
         self.click(self.SEARCH_BTN)
 
     # Clicks on the switch dropdown list button
