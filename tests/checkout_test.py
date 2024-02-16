@@ -1,7 +1,9 @@
 # Import necessary statements
+import time
+
 import pytest
 from selenium import webdriver
-from selenium.common import NoSuchElementException
+from selenium.common import NoSuchElementException, WebDriverException
 
 from configs import config_login, config_checkout
 from pages.checkout_page import CheckoutPage
@@ -25,11 +27,12 @@ class TestCheckout:
         top_bar_page = TopBar(self.driver)
         login_page = top_bar_page.click_login()
         login_page.fill_info(config_login.VALID_USERNAME, config_login.VALID_PASSWORD)
+        time.sleep(2)
         top_bar_page.click_cart_icon()
         mini_cart = MiniCartPage(self.driver)
         try:
             mini_cart.remove_item()
-        except NoSuchElementException:
+        except WebDriverException:
             # Handle the case where the element is not found
             print("Element not found!")
         product_page = ProductPage(self.driver)
@@ -37,6 +40,7 @@ class TestCheckout:
         product_page.choose_product_size(config_checkout.SIZE)
         product_page.choose_product_color(config_checkout.COLOR)
         product_page.click_add_to_cart()
+        time.sleep(2)
         top_bar_page.click_cart_icon()
         mini_cart.click_proceed_checkout()
         yield

@@ -1,3 +1,6 @@
+import time
+
+from selenium.common import WebDriverException
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.by import By
 import allure
@@ -21,22 +24,22 @@ class CheckoutPage(BasePage):
     SHIP_HERE_BTN = (By.CSS_SELECTOR, "button[class='action primary action-save-address'] span")
     NEXT_BTN = (By.CSS_SELECTOR, ".button.action.continue.primary")
     PLACE_ORDER_BTN = (By.CSS_SELECTOR, "button[title='Place Order']")
-    REVEL_DISCOUNT_CODE_BTN = (By.CSS_SELECTOR, "#block-discount-heading")
+    REVEL_DISCOUNT_CODE_BTN = (By.CSS_SELECTOR, "span[id='block-discount-heading'] span")
     DISCOUNT_CODE_FIELD = (By.CSS_SELECTOR, "#discount-code")
     APPLY_DISCOUNT_BTN = (By.CSS_SELECTOR, "button[value='Apply Discount'] span")
     CANCEL_DISCOUNT_COUPON_BTN = (By.CSS_SELECTOR, "button[value='Cancel'] span span")
     DISCOUNT_COUPON_MSG = (By.CSS_SELECTOR, "div[role='alert']")
     DISCOUNT_COUPON_ERROR_MSG = (By.CSS_SELECTOR, "div[data-ui-id='checkout-cart-validationmessages-message-error']")
     CHECKOUT_PAGE_LOADER = (By.CSS_SELECTOR, "img[alt='Loading...']")
+    CHECKOUT_MAIN_LOADER = (By.CSS_SELECTOR, "div.loading-mask")
     # account creation
     EMAIL_ADDRESS_ANONYMOUS_FIELD = (By.CSS_SELECTOR, ".control._with-tooltip #customer-email")
     ACCOUNT_EXISTING_NOTIFICATION = (By.CSS_SELECTOR, "div[class='control'] span[class='note']")
     COSTUMER_PASSWORD_FROM_ADDRESS_FIELD = (By.CSS_SELECTOR, "#customer-password")
     LOGIN_BTN = (By.CSS_SELECTOR, ".action.login.primary")
     SIGNIN_FROM_CHECKOUT_BTN = (By.CSS_SELECTOR, "button[class='action action-auth-toggle'] span")
-    EMAIL_ADDRESS_SIGNIN_FROM_CHECKOUT_FIELD= (By.CSS_SELECTOR, "#login-email")
-    PASSWORD_SIGNIN_FROM_CHECKOUT_FIELD= (By.CSS_SELECTOR, "#login-password")
-
+    EMAIL_ADDRESS_SIGNIN_FROM_CHECKOUT_FIELD = (By.CSS_SELECTOR, "#login-email")
+    PASSWORD_SIGNIN_FROM_CHECKOUT_FIELD = (By.CSS_SELECTOR, "#login-password")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -77,7 +80,12 @@ class CheckoutPage(BasePage):
 
     @allure.step("Reveal the discount code section")
     def reveal_discount_code_section(self):
-        self.wait_for_element_invisibility(*self.CHECKOUT_PAGE_LOADER)
+        time.sleep(5)
+        # try:
+        #     self.wait_for_element_invisibility(*self.CHECKOUT_PAGE_LOADER)
+        # except WebDriverException:
+        #     # Handle the case where the element is not found
+        #     print("Element not found!")
         self.click(self.REVEL_DISCOUNT_CODE_BTN)
 
     @allure.step("Apply a discount code: {discount_code}")
@@ -92,6 +100,7 @@ class CheckoutPage(BasePage):
 
     @allure.step("Check if the discount code is applied successfully")
     def is_discount_code_applied_successfully(self):
+        # self.wait_for_element_invisibility(*self.CHECKOUT_PAGE_LOADER)
         return self.get_text(self.DISCOUNT_COUPON_MSG)
 
     @allure.step("Convert price string to float: {price_str}")
