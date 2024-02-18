@@ -1,5 +1,6 @@
 import time
 
+import allure
 import pytest
 from selenium import webdriver
 from configs import config_login, config_signup, config_cart, config_checkout, config_account
@@ -12,6 +13,8 @@ from pages.product_page import ProductPage
 from pages.top_bar import TopBar
 
 
+@allure.feature("Login")
+@allure.description("E2E test")
 class TestE2E:
     def test_end_2_end_purchase_with_new_account(self):
         top_bar_page = TopBar(self.driver)
