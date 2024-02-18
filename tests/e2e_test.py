@@ -40,3 +40,24 @@ class TestE2E:
         checkout_page.apply_discount_code(config_checkout.VALID_DISCOUNT_CODE)
         checkout_page.click_place_order()
         assert checkout_page.get_purchase_msg() == config_checkout.EXPECTED_SUCCESS_PURCHASE_MSG
+
+    def test_end_2_end_purchase_with_exist_account(self):
+        top_bar_page = TopBar(self.driver)
+        login_page = top_bar_page.click_login()
+        login_page.fill_info(config_login.VALID_USERNAME, config_login.VALID_PASSWORD)
+        product_page = ProductPage(self.driver)
+        product_page.driver.get(config_cart.PRODUCT_PAGE_URL)
+        product_page.choose_product_size(config_cart.PRODUCT_SIZE)
+        product_page.choose_product_color(config_cart.PRODUCT_COLOR)
+        product_page.click_add_to_cart()
+        time.sleep(2)
+        top_bar = TopBar(self.driver)
+        top_bar.click_cart_icon()
+        mini_cart = MiniCartPage(self.driver)
+        mini_cart.click_proceed_checkout()
+        checkout_page = CheckoutPage(self.driver)
+        checkout_page.click_next_button()
+        checkout_page.reveal_discount_code_section()
+        checkout_page.apply_discount_code(config_checkout.VALID_DISCOUNT_CODE)
+        checkout_page.click_place_order()
+        assert checkout_page.get_purchase_msg() == config_checkout.EXPECTED_SUCCESS_PURCHASE_MSG
