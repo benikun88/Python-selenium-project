@@ -9,7 +9,7 @@ from pages.product_page import ProductPage
 from pages.top_bar import TopBar
 
 
-@allure.feature("Login")
+@allure.feature("E2E")
 @allure.description("E2E test")
 class TestE2E:
     def test_end_2_end_purchase_with_new_account(self):
