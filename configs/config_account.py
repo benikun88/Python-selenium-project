@@ -1,4 +1,4 @@
-# configs/config_checkout.py
+# configs/config_account.py
 
 # Test data for checkout
 VALID_DISCOUNT_CODE = "20poff"

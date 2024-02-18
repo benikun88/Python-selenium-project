@@ -102,11 +102,12 @@ class TestCart:
         assert cart_page.is_page_loaded() == True
 
     @allure.description("Test quantity error message")
-    def test_qty_error(self):
+    def test_qty_out_of_stock_error(self):
         top_bar = TopBar(self.driver)
         product_page = ProductPage(self.driver)
         product_page.driver.get(config_cart.INVALID_PRODUCT_PAGE_URL)
-        product_page.set_product_quantity("9999")
+        product_page.choose_product_size(config_cart.PRODUCT_SIZE_OUT_OF_STOCK)
+        product_page.choose_product_color(config_cart.PRODUCT_COLOR_OUT_OF_STOCK)
         product_page.click_add_to_cart()
         cart_page = CartPage(self.driver)
         assert cart_page.get_error_cart_msg() == config_cart.QTY_ERROR_MSG

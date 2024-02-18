@@ -72,7 +72,8 @@ class BasePage:
         return email
 
     def select_by_value(self, locator, value):
-        select = Select(*locator)
+        el: WebElement = self.wait_for_element_presence(*locator)
+        select = Select(el)
         select.select_by_value(value)
 
     def select_by_text(self, locator, text):

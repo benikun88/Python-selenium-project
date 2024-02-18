@@ -4,12 +4,22 @@ from pages.base_page import BasePage
 
 
 class AccountPage(BasePage):
-
     # Locators for elements on the page
     EDIT_BTN = (By.CSS_SELECTOR, "div[class='box box-information'] a[class='action edit']")
     CHANGE_PASSWORD_BTN = (By.CSS_SELECTOR, "#top-cart-btn-checkout")
     MANAGE_ADDRESS_BTN = (By.CSS_SELECTOR,
-                          "body > div:nth-child(5) > main:nth-child(3) > div:nth-child(3) > div:nth-child(1) > div:nth-child(6) > div:nth-child(1) > a:nth-child(2) > span:nth-child(1)")
+                          "body > div:nth-child(5) > main:nth-child(3) > div:nth-child(3) > div:nth-child(1) > "
+                          "div:nth-child(6) > div:nth-child(1) > a:nth-child(2) > span:nth-child(1)")
+    EDIT_ADDRESS_BTN: list = (By.CSS_SELECTOR, "a[data-ui-id='default-billing-edit-link'] span")
+    # address locators
+    STREET_ADDRESS_TEXT_BOX = (By.CSS_SELECTOR, "#street_1")
+    CITY_TEXT_BOX = (By.CSS_SELECTOR, "#city")
+    COUNTRY_DROP_LIST = (By.CSS_SELECTOR, "#country")
+    # COUNTRY_DROP_LIST = (By.NAME, ".checkout-shipping-address .field._required .control .select")
+    ZIP_CODE = (By.CSS_SELECTOR, "#zip")
+    PHONE_NUMBER_TEXT_BOX = (By.CSS_SELECTOR, "#telephone")
+    SAVE_ADDRESS_BTN = (By.CSS_SELECTOR, "button[title='Save Address'] span")
+
     ORDER_STATUS_COL: list = (By.CSS_SELECTOR, ".col.status")
     VIEW_ORDER: list = (By.CSS_SELECTOR, ".action.view")
     REORDER_ORDER: list = (By.CSS_SELECTOR, ".action.order")
@@ -84,3 +94,28 @@ class AccountPage(BasePage):
     @allure.step("Retrieve the successful registration text message")
     def get_successful_registration_text_msg(self):
         return self.get_text(self.ACCOUNT_UPDATE_INFO_MSG)
+
+    @allure.step("Click edit adress Btn")
+    def click_edit_address_btn(self):
+        return self.click(self.EDIT_ADDRESS_BTN)
+
+    @allure.step("Fill shipping address information")
+    def fill_shipping_address(self, first_name, last_name, street_address, city, country, phone_number):
+        self.fill_text(self.FIRST_NAME_TEXT_BOX, first_name)
+        self.fill_text(self.LAST_NAME_TEXT_BOX, last_name)
+        self.fill_text(self.STREET_ADDRESS_TEXT_BOX, street_address)
+        self.fill_text(self.CITY_TEXT_BOX, city)
+        self.select_by_value(self.COUNTRY_DROP_LIST, country)
+        self.fill_text(self.PHONE_NUMBER_TEXT_BOX, phone_number)
+
+    @allure.step("Fill shipping address information")
+    def fill_shipping_address(self, street_address, city, country, phone_number, zip_code):
+        self.fill_text(self.STREET_ADDRESS_TEXT_BOX, street_address)
+        self.fill_text(self.CITY_TEXT_BOX, city)
+        self.select_by_value(self.COUNTRY_DROP_LIST, country)
+        self.fill_text(self.PHONE_NUMBER_TEXT_BOX, phone_number)
+        self.fill_text(self.ZIP_CODE, zip_code)
+
+    @allure.step("Click save Address")
+    def click_save_address(self):
+        return self.click(self.SAVE_ADDRESS_BTN)

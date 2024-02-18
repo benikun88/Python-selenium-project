@@ -19,7 +19,9 @@ class CheckoutPage(BasePage):
     LAST_NAME_TEXT_BOX = (By.NAME, "lastname")
     STREET_ADDRESS_TEXT_BOX = (By.NAME, "street[0]")
     CITY_TEXT_BOX = (By.NAME, "city")
-    COUNTRY_DROP_LIST = (By.NAME, "region_id")
+    COUNTRY_DROP_LIST = (By.NAME, "country_id")
+    # COUNTRY_DROP_LIST = (By.NAME, ".checkout-shipping-address .field._required .control .select")
+    ZIP_CODE = (By.NAME, "postcode")
     PHONE_NUMBER_TEXT_BOX = (By.NAME, "telephone")
     SHIP_HERE_BTN = (By.CSS_SELECTOR, "button[class='action primary action-save-address'] span")
     NEXT_BTN = (By.CSS_SELECTOR, ".button.action.continue.primary")
@@ -61,6 +63,14 @@ class CheckoutPage(BasePage):
         self.select_by_value(self.COUNTRY_DROP_LIST, country)
         self.fill_text(self.PHONE_NUMBER_TEXT_BOX, phone_number)
 
+    @allure.step("Fill shipping address information")
+    def fill_shipping_address(self,street_address, city, country, phone_number,zip_code):
+        self.fill_text(self.STREET_ADDRESS_TEXT_BOX, street_address)
+        self.fill_text(self.CITY_TEXT_BOX, city)
+        self.select_by_value(self.COUNTRY_DROP_LIST, country)
+        self.fill_text(self.PHONE_NUMBER_TEXT_BOX, phone_number)
+        self.fill_text(self.ZIP_CODE, zip_code)
+
     @allure.step("Click on the 'Ship Here' button")
     def click_ship_here_button(self):
         self.click(self.SHIP_HERE_BTN)
@@ -71,12 +81,18 @@ class CheckoutPage(BasePage):
         self.click(self.NEXT_BTN)
 
     @allure.step("Place the order")
-    def place_order(self):
+    def click_place_order(self):
+        self.wait_for_element_invisibility(*self.CHECKOUT_PAGE_LOADER)
         self.click(self.PLACE_ORDER_BTN)
 
     @allure.step("Check if the page is loaded")
     def is_page_loaded(self):
         return self.is_elements_exist(self.CHECKOUT_PAGE_LOAD_TITLE)
+
+    @allure.step("Check if purchase succeeded")
+    def get_purchase_msg(self):
+        self.wait_for_element_invisibility(*self.CHECKOUT_PAGE_LOADER)
+        return self.get_text(self.CHECKOUT_PAGE_LOAD_TITLE)
 
     @allure.step("Reveal the discount code section")
     def reveal_discount_code_section(self):
