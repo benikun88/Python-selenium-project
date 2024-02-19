@@ -2,3 +2,4 @@ selenium==4.17.2
 pytest==7.4.4
 allure-pytest==2.13.2
 pytest-xdist==3.5.0
+pytest-rerunfailures==13.0
