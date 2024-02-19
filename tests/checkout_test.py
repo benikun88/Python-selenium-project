@@ -13,6 +13,7 @@ import allure
 
 
 # Test class definition
+@pytest.mark.xdist_group(name="serial")
 @allure.feature("Checkout")
 class TestCheckout:
     # Fixture for setup and teardown

@@ -1,6 +1,8 @@
 import time
 
 import allure
+import pytest
+
 from configs import config_login, config_signup, config_cart, config_checkout, config_account
 from pages.account_page import AccountPage
 from pages.checkout_page import CheckoutPage
@@ -41,6 +43,7 @@ class TestE2E:
         checkout_page.click_place_order()
         assert checkout_page.get_purchase_msg() == config_checkout.EXPECTED_SUCCESS_PURCHASE_MSG
 
+    @pytest.mark.xdist_group(name="serial")
     def test_end_2_end_purchase_with_exist_account(self):
         top_bar_page = TopBar(self.driver)
         login_page = top_bar_page.click_login()
