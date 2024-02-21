@@ -32,7 +32,7 @@ def pytest_exception_interact(report):
 
 def pytest_sessionfinish() -> None:
     environment_properties = {
-        'browser': webdriver.Chrome.name,
+        'browser': driver.name,
         'driver_version': driver.capabilities['browserVersion']
     }
     allure_env_path = os.path.join("allure-results", 'environment.properties')
