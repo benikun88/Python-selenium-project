@@ -5,6 +5,9 @@ import pytest
 from selenium.webdriver.chrome.options import Options
 import allure
 from selenium import webdriver
+import filelock
+import os
+import uuid
 
 
 @pytest.fixture(autouse=True)
@@ -14,7 +17,7 @@ def setup(request):
     options.add_experimental_option("detach", True)
     options.add_argument("--headless")
     # options.add_argument("--no-sandbox")
-    # options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-dev-shm-usage")
     # options = webdriver.ChromeOptions()
     driver = webdriver.Chrome(options=options)
     request.cls.driver = driver
@@ -32,8 +35,8 @@ def pytest_exception_interact(report):
 
 # def pytest_sessionfinish() -> None:
 #     environment_properties = {
-#         'browser': driver.name,
-#         'driver_version': driver.capabilities['browserVersion']
+#      'browser': driver.name,
+#      'driver_version': driver.capabilities['browserVersion']
 #     }
 #     allure_env_path = os.path.join("allure-results", 'environment.properties')
 #     with open(allure_env_path, 'w') as f:
