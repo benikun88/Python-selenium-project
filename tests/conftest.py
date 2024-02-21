@@ -5,9 +5,6 @@ import pytest
 from selenium.webdriver.chrome.options import Options
 import allure
 from selenium import webdriver
-import filelock
-import os
-import uuid
 
 
 @pytest.fixture(autouse=True)
