@@ -3,3 +3,6 @@ pytest==8.0.1
 allure-pytest==2.13.2
 pytest-xdist==3.5.0
 pytest-rerunfailures==13.0
+requests==2.31.0
+Faker==19.6.1
+answers~=0.0.4
