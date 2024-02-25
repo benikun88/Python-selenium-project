@@ -6,6 +6,7 @@ import uuid
 from answers.api_calls import ApiRequests
 
 
+@pytest.mark.xdist_group(name="serial")
 @allure.feature("API Tests")
 @allure.story("Customer Management")
 @pytest.mark.api
@@ -76,6 +77,7 @@ class TestApi:
         response = ApiRequests.post(url, json=self.customer_payload, headers=self.common_headers)
         assert response.status_code == 200, f"Failed to create customer: {response.text}"
         customer_id = response.json()["id"]
+        print(response.json()["email"])
         assert customer_id is not None, "Customer ID not received"
 
     @allure.description("Test get customer info")
@@ -88,6 +90,7 @@ class TestApi:
         response = ApiRequests.get(url, headers=headers)
         assert response.status_code == 200, f"Failed to get customer info: {response.text}"
         customer_info = response.json()
+        print(customer_info["email"])
         assert customer_info["email"] == self.random_email, "Incorrect customer email"
 
     def test_create_customer_invalid_email(self):
