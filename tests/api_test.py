@@ -93,6 +93,17 @@ class TestApi:
         print(customer_info["email"])
         assert customer_info["email"] == self.random_email, "Incorrect customer email"
 
+    @allure.description("Test get customer info with wrong credentials")
+    def test_get_customer_info_with_wrong_data(self):
+        url = f"{self.base_url}/customers/me"
+        headers = {
+            **self.common_headers,
+            "Authorization": f"Bearer {"12"}",
+        }
+        response = ApiRequests.get(url, headers=headers)
+        assert response.status_code == 401, "Expected 400 Bad Request"
+        assert response.json()["message"] == """The consumer isn't authorized to access %resources."""
+
     def test_create_customer_invalid_email(self):
         invalid_email_payload = self.customer_payload.copy()
         invalid_email_payload["customer"]["email"] = "invalid_email"
