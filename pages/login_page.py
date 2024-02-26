@@ -20,6 +20,7 @@ class LoginPage(BasePage):
     RESET_MY_PASSWORD_BTN = (By.CSS_SELECTOR, ".action.submit.primary")
     EMAIL_RESET_FIELD = (By.CSS_SELECTOR, "#email_address")
     ACCOUNT_ASSOCIATED_INFO_MSG = (By.CSS_SELECTOR, ".message-success.success.message div")
+    EMAIL_TEXT_BOX_ERROR = (By.CSS_SELECTOR, "#email_address-error")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -37,6 +38,11 @@ class LoginPage(BasePage):
     def get_email_error(self):
         # Return the text of the email error element
         return self.get_text(self.EMAIL_FIELD_ERROR)
+
+    @allure.step("Retrieve email textbox error message")
+    def get_email_checkbox_error(self):
+        # Return the text of the email error element
+        return self.get_text(self.EMAIL_TEXT_BOX_ERROR)
 
     @allure.step("Retrieve password error message")
     def get_password_error(self):

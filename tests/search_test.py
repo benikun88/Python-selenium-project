@@ -13,6 +13,12 @@ class TestSearch:
         ("blablabla", None, "Your search returned no results."),
         ("Elisa", None, None)
     ])
+    @allure.description("""
+            Test search functionality: 
+            - 'ELISA': Expecting title 'Search results for: 'ELISA''.
+            - 'blablabla': Expecting message 'Your search returned no results.'
+            - 'Elisa': Expecting product names containing 'Elisa'.
+        """)
     def test_search(self, query, expected_title, expected_message):
         top_bar_page = TopBar(self.driver)
         top_bar_page.search_for_item(query)

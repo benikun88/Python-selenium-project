@@ -44,6 +44,7 @@ class TestLogin:
 
     @pytest.mark.parametrize("username, password", [
         (config_login.VALID_USERNAME, config_login.VALID_PASSWORD)])
+    @allure.description("Verify login consistency after page reload")
     def test_login_consist_after_reload_page(self, username, password):
         login_page.fill_info(username, password)
         if top_bar_page.get_success_login() == config_login.EXPECTED_SUCCESS_LOGIN:
@@ -55,6 +56,7 @@ class TestLogin:
     # sign out test
     @pytest.mark.parametrize("username, password", [
         (config_login.VALID_USERNAME, config_login.VALID_PASSWORD)])
+    @allure.description("Verify sign out functionality")
     def test_sign_out(self, username, password):
         login_page.fill_info(username, password)
         top_bar_page.click_switch_dropdown_list_my_account()
@@ -62,8 +64,16 @@ class TestLogin:
         assert top_bar_page.get_success_logout_msg() == config_login.EXPECTED_SUCCESS_LOGOUT_MSG
 
     # Sign in- password recovery tests
+    @allure.description("Verify password recovery functionality")
     def test_password_recovery(self):
         login_page.click_forgot_password()
         login_page.fill_email_address_reset("Benikun88@gmail.com")
         login_page.click_reset_password()
-        assert login_page.get_reset_msg_process() == "If there is an account associated with Benikun88@gmail.com you will receive an email with a link to reset your password."
+        assert login_page.get_reset_msg_process() == config_login.EXPECTED_PASSWORD_SUCCESS
+
+    @allure.description("Verify password recovery with invalid email")
+    def test_password_recovery_with_invalid_email(self):
+        login_page.click_forgot_password()
+        login_page.fill_email_address_reset("Benikun88gmail.com")
+        login_page.click_reset_password()
+        assert login_page.get_email_checkbox_error() == config_login.EXPECTED_PASSWORD_TEXTBOX_ERROR
