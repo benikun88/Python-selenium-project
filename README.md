@@ -22,7 +22,7 @@ Testers can conduct thorough functionality testing by adding items to the cart, 
 
 ## Tasks
 
-- **Automate 50 Scenarios UI and API (Ongoing):** The project aims to automate 50 test scenarios, enhancing coverage and ensuring robust testing of Magento features.
+- **Automate 50 Scenarios UI and API Test (Ongoing):** The project aims to automate 50 test scenarios, enhancing coverage and ensuring robust testing of Magento features.
 
 - **Required Design Patterns:** The automation project follows the Page Object Model (POM) along with the "Page Factory" design pattern to enhance maintainability and readability of the code.
 
