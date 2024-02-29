@@ -1,4 +1,6 @@
-# Configurations for API tests
+# config_API.py
+
+import uuid
 
 # Credentials
 consumer_key = "u5gkmvsnxvc5w6qxoy2iwx98mkc1j30d"
@@ -18,10 +20,13 @@ common_headers = {
     "User-Agent": "Chrome/111.0.5575.46"
 }
 
+# Generate random email
+random_email = f"jdoe{uuid.uuid4().hex[:6]}@example.com"
+
 # Create customer payload
 customer_payload = {
     "customer": {
-        "email": "jdoe69@example.com",
+        "email": random_email,
         "firstname": "Jane",
         "lastname": "Doe",
         "addresses": [{
@@ -41,11 +46,5 @@ customer_payload = {
             "countryId": "US"
         }]
     },
-    "password": "Password1"
-}
-
-# Customer token payload
-token_payload = {
-    "username": "jdoe@example999.com",
     "password": "Password1"
 }
