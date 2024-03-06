@@ -110,7 +110,7 @@ class TestCart:
         product_page.choose_product_color(config_cart.PRODUCT_COLOR_OUT_OF_STOCK)
         product_page.click_add_to_cart()
         cart_page = CartPage(self.driver)
-        assert cart_page.get_error_cart_msg() == config_cart.QTY_ERROR_MSG()
+        assert cart_page.get_error_cart_msg() == config_cart.QTY_ERROR_MSG
 
     @pytest.mark.usefixtures("setup_cart")
     @pytest.mark.usefixtures("tear_down_cart")
