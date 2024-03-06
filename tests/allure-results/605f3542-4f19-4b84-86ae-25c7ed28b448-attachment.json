@@ -1,0 +1,26 @@
+{
+    "URL": "https://magento.softwaretestingboard.com/rest/default/V1/integration/customer/token/",
+    "Headers": {
+        "Date": "Thu, 29 Feb 2024 10:43:35 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Length": "54",
+        "Connection": "keep-alive",
+        "expires": "Thu, 19 Nov 1981 08:52:00 GMT",
+        "Cache-Control": "no-store, no-cache, must-revalidate",
+        "pragma": "no-cache",
+        "x-frame-options": "SAMEORIGIN",
+        "set-cookie": "PHPSESSID=827611b7d87be75f321673ab0c102a07; expires=Thu, 29-Feb-2024 11:43:35 GMT; Max-Age=3600; path=/; domain=magento.softwaretestingboard.com; secure; HttpOnly; SameSite=Lax, persistent_shopping_cart=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; Max-Age=0; path=/; secure; HttpOnly; SameSite=Lax, form_key=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; Max-Age=0; path=/; domain=magento.softwaretestingboard.com; SameSite=Lax",
+        "vary": "Accept-Encoding",
+        "Content-Encoding": "gzip",
+        "x-ua-compatible": "IE=edge",
+        "CF-Cache-Status": "DYNAMIC",
+        "Report-To": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=syPCdGbJEwkCtkMLEH%2B%2ByexGw0NCQYCP%2FrnU%2FujfBSI4aMo09tdZZReceUS%2BQ9w%2FRKmuO%2BNjRZoXhnFmiw0Xbs96SC7mxeB9EuKydMGo0SS0o5FyX80FtMhfUG%2B1X39eYnb1cagvuU9o6zHhp%2FdAsLMIcg%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+        "NEL": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+        "Strict-Transport-Security": "max-age=15552000",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare",
+        "CF-RAY": "85d04ea01b7809bb-HFA",
+        "alt-svc": "h3=\":443\"; ma=86400"
+    },
+    "Response": "bgifzopvfcaw1w2ghbydhmkffqfpg7z4"
+}

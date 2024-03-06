@@ -1,0 +1,15 @@
+{
+    "RequestMethod": "POST",
+    "RequestURL": "https://magento.softwaretestingboard.com/rest/default/V1/integration/customer/token/",
+    "headers": {
+        "Content-Type": "application/json",
+        "Host": "magento.softwaretestingboard.com",
+        "Cookie": "PHPSESSID=827611b7d87be75f321673ab0c102a07",
+        "User-Agent": "Chrome/111.0.5575.46"
+    },
+    "q_params": null,
+    "payload": {
+        "username": "jdoe27c309@example.com",
+        "password": "Password1"
+    }
+}

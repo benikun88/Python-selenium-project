@@ -1,0 +1,41 @@
+{
+    "RequestMethod": "POST",
+    "RequestURL": "https://magento.softwaretestingboard.com/rest/default/V1/customers",
+    "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer canrg2bss5rijvirjs5fjnfsb62odz16",
+        "Host": "magento.softwaretestingboard.com",
+        "Content-Length": "69",
+        "Cookie": "PHPSESSID=827611b7d87be75f321673ab0c102a07",
+        "User-Agent": "Chrome/111.0.5575.46"
+    },
+    "q_params": null,
+    "payload": {
+        "customer": {
+            "email": "invalid_email",
+            "firstname": "Jane",
+            "lastname": "Doe",
+            "addresses": [
+                {
+                    "defaultShipping": true,
+                    "defaultBilling": true,
+                    "firstname": "Jane",
+                    "lastname": "Doe",
+                    "region": {
+                        "regionCode": "NY",
+                        "region": "New York",
+                        "regionId": 43
+                    },
+                    "postcode": "10755",
+                    "street": [
+                        "123 Oak Ave"
+                    ],
+                    "city": "Purchase",
+                    "telephone": "512-555-1111",
+                    "countryId": "US"
+                }
+            ]
+        },
+        "password": "Password1"
+    }
+}

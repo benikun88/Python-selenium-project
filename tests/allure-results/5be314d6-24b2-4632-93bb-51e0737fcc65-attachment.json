@@ -1,0 +1,30 @@
+{
+    "URL": "https://magento.softwaretestingboard.com/rest/default/V1/customers/me",
+    "Headers": {
+        "Date": "Thu, 29 Feb 2024 10:29:54 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Length": "104",
+        "Connection": "keep-alive",
+        "expires": "Thu, 19 Nov 1981 08:52:00 GMT",
+        "Cache-Control": "no-store, no-cache, must-revalidate",
+        "pragma": "no-cache",
+        "set-cookie": "PHPSESSID=827611b7d87be75f321673ab0c102a07; expires=Thu, 29-Feb-2024 11:29:54 GMT; Max-Age=3600; path=/; domain=magento.softwaretestingboard.com; secure; HttpOnly; SameSite=Lax",
+        "vary": "Accept-Encoding",
+        "Content-Encoding": "gzip",
+        "x-ua-compatible": "IE=edge",
+        "CF-Cache-Status": "DYNAMIC",
+        "Report-To": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=W%2FkLvPRRmWINV2N3u6ZRGBg140rDybry7WPzSwSsdL2Vw4mzzESIFPnyYWVTKQCjVBi5%2Fg2eE58gjW3tZ8PzXsWMjPAmBQmitXHfTyWkJ%2Fcm778Y7%2ByvWhUpaSPARu1Y995t7BK8yrQpWYFRanwm9vcl0g%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+        "NEL": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+        "Strict-Transport-Security": "max-age=15552000",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare",
+        "CF-RAY": "85d03a924e9609bf-HFA",
+        "alt-svc": "h3=\":443\"; ma=86400"
+    },
+    "Response": {
+        "message": "The consumer isn't authorized to access %resources.",
+        "parameters": {
+            "resources": "self"
+        }
+    }
+}

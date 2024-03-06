@@ -1,0 +1,13 @@
+{
+    "RequestMethod": "GET",
+    "RequestURL": "https://magento.softwaretestingboard.com/rest/default/V1/customers/me",
+    "headers": {
+        "Content-Type": "application/json",
+        "Host": "magento.softwaretestingboard.com",
+        "Cookie": "PHPSESSID=827611b7d87be75f321673ab0c102a07",
+        "User-Agent": "Chrome/111.0.5575.46",
+        "Authorization": "Bearer mr6jtscl8l44wx8jl64n61y5hi9hml6g"
+    },
+    "q_params": null,
+    "payload": null
+}

@@ -1,0 +1,27 @@
+{
+    "URL": "https://magento.softwaretestingboard.com/rest/default/V1/customers",
+    "Headers": {
+        "Date": "Sun, 25 Feb 2024 14:08:33 GMT",
+        "Content-Type": "application/json; charset=utf-8",
+        "Content-Length": "70",
+        "Connection": "keep-alive",
+        "expires": "Thu, 19 Nov 1981 08:52:00 GMT",
+        "Cache-Control": "no-store, no-cache, must-revalidate",
+        "pragma": "no-cache",
+        "set-cookie": "PHPSESSID=827611b7d87be75f321673ab0c102a07; expires=Sun, 25-Feb-2024 15:08:33 GMT; Max-Age=3600; path=/; domain=magento.softwaretestingboard.com; secure; HttpOnly; SameSite=Lax",
+        "vary": "Accept-Encoding",
+        "Content-Encoding": "gzip",
+        "x-ua-compatible": "IE=edge",
+        "CF-Cache-Status": "DYNAMIC",
+        "Report-To": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=wc65dLBR0tPGwVemYfDBEzJ7Qy8R9s1Fa6i6FcKT%2FdYn8W3s1i2AteMaSp6%2B3BXahkG%2BLHzB0ZHWQy2hXbKcQaA%2FdJhvfo5Gk9hYlTN5wh1jllCNAnT7gGCFEACx2ixgo9xzesO6jQsVPHwXB0%2FhFBnyPA%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+        "NEL": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+        "Strict-Transport-Security": "max-age=15552000",
+        "X-Content-Type-Options": "nosniff",
+        "Server": "cloudflare",
+        "CF-RAY": "85b0855d580309c1-HFA",
+        "alt-svc": "h3=\":443\"; ma=86400"
+    },
+    "Response": {
+        "message": "\"Email\" is not a valid email address."
+    }
+}
