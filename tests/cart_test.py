@@ -120,4 +120,4 @@ class TestCart:
         mini_cart = MiniCartPage(self.driver)
         mini_cart.view_cart()
         cart=CartPage(self.driver)
-        assert top_bar.get_cart_icon_qty() == config_cart.EXPECTED_INITIAL_CART_QTY
+        assert cart.get_cart_icon_qty() == config_cart.EXPECTED_INITIAL_CART_QTY

@@ -55,6 +55,10 @@ class BasePage:
         el: WebElement = self.wait_for_element_visibility(*locator)
         return el.text
 
+    def get_text_from_attribute(self, locator, attribute_name='text') -> str:
+        el: WebElement = self.wait_for_element_visibility(*locator)
+        return el.get_attribute(attribute_name)
+
     def get_text_not_visiable(self, locator) -> str:
         el: WebElement = self.wait_for_element_presence(*locator)
         return el.text

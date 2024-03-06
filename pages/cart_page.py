@@ -94,4 +94,4 @@ class CartPage(BasePage):
         return self.get_text(self.CART_ERROR_MSG)
 
     def get_cart_icon_qty(self):
-        return self.get_text(self.CART_COUNTER)
+        return self.get_text_from_attribute(self.CART_COUNTER,"value")
