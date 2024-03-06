@@ -6,7 +6,7 @@ from pages.base_page import BasePage
 class AccountPage(BasePage):
     # Locators for elements on the page
     EDIT_BTN = (By.CSS_SELECTOR, "div[class='box box-information'] a[class='action edit']")
-    CHANGE_PASSWORD_BTN = (By.CSS_SELECTOR, "#top-cart-btn-checkout")
+    CHANGE_PASSWORD_BTN = (By.CSS_SELECTOR, ".action.change-password")
     MANAGE_ADDRESS_BTN = (By.CSS_SELECTOR,
                           "body > div:nth-child(5) > main:nth-child(3) > div:nth-child(3) > div:nth-child(1) > "
                           "div:nth-child(6) > div:nth-child(1) > a:nth-child(2) > span:nth-child(1)")
@@ -34,9 +34,15 @@ class AccountPage(BasePage):
     SAVE_CHNAGE_BTN = (By.CSS_SELECTOR, "button[title='Save']")
     MY_ORDERS_SECTION = (By.CSS_SELECTOR, "div[class='sidebar sidebar-main'] li:nth-child(2) a:nth-child(1)")
     ACCOUNT_UPDATE_INFO_MSG = (By.CSS_SELECTOR, ".message-success.success.message div")
+    ACCOUNT_UPDATE_INFO_MSG_ERROR = (By.CSS_SELECTOR, ".message-error.error.message")
+    ACCOUNT_PAGE_LOAD_TITLE = (By.CSS_SELECTOR, ".base")
 
     def __init__(self, driver):
         super().__init__(driver)
+
+    @allure.step("Check if account page is loaded")
+    def is_page_loaded(self):
+        return self.is_elements_exist(self.ACCOUNT_PAGE_LOAD_TITLE)
 
     # Clicks the "Edit" button
     @allure.step("Click the Edit button")
@@ -90,6 +96,10 @@ class AccountPage(BasePage):
     @allure.step("Retrieve the success change message")
     def get_success_change_msg(self):
         return self.get_text(self.ACCOUNT_UPDATE_INFO_MSG)
+
+    @allure.step("Retrieve the fail change message")
+    def get_fail_change_msg(self):
+        return self.get_text(self.ACCOUNT_UPDATE_INFO_MSG_ERROR)
 
     @allure.step("Retrieve the successful registration text message")
     def get_successful_registration_text_msg(self):

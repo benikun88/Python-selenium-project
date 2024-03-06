@@ -19,6 +19,7 @@ class CartPage(BasePage):
     DISCOUNT_COUPON_SUCCSES_MSG = (
         By.CSS_SELECTOR, "div[data-ui-id='checkout-cart-validationmessages-message-success']")
     CART_ERROR_MSG = (By.CSS_SELECTOR, ".message-error.error.message")
+    CART_COUNTER = (By.CSS_SELECTOR, ".input-text.qty")
 
     # Constructor
     def __init__(self, driver):
@@ -91,3 +92,6 @@ class CartPage(BasePage):
     @allure.step("Get error message from the cart")
     def get_error_cart_msg(self):
         return self.get_text(self.CART_ERROR_MSG)
+
+    def get_cart_icon_qty(self):
+        return self.get_text(self.CART_COUNTER)

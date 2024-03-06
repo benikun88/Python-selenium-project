@@ -2,6 +2,8 @@ import time
 
 import allure
 from selenium.webdriver.common.by import By
+
+from pages.account_page import AccountPage
 from pages.base_page import BasePage
 from pages.login_page import LoginPage
 from pages.search_page import SearchPage
@@ -14,9 +16,10 @@ class TopBar(BasePage):
     CREATE_ACCOUNT_BTN = (By.XPATH, "//div[@class='panel header']//a[normalize-space()='Create an Account']")
     CART_ICON_BTN = (By.CSS_SELECTOR, ".action.showcart")
     CART_LOADING = (By.CSS_SELECTOR, "._block-content-loading")
-    CART_COUNTER = (By.CSS_SELECTOR, ".counter-number")
+    MINI_CART_COUNTER = (By.CSS_SELECTOR, ".counter-number")
     CART_COUNTER_EMPTY = (By.CSS_SELECTOR, ".counter.qty.empty .counter-number")
     EMPTY_CART_MSG = (By.CSS_SELECTOR, ".subtitle.empty")
+    CART_COUNTER = (By.CSS_SELECTOR, ".input-text.qty")
     SEARCH_TEXT_BOX = (By.CSS_SELECTOR, "#search")
     SEARCH_BTN = (By.CSS_SELECTOR, "button[title='Search']")
     TOP_BAR_ITEMS = (By.CSS_SELECTOR, ".level-top.ui-corner-all")
@@ -66,7 +69,7 @@ class TopBar(BasePage):
     @allure.step("Search for item: {search_query}")
     def search_for_item(self, search_query):
         self.fill_text(self.SEARCH_TEXT_BOX, search_query)
-        self.fill_text_without_clean(self.SEARCH_TEXT_BOX,"")
+        self.fill_text_without_clean(self.SEARCH_TEXT_BOX, "")
         self.click(self.SEARCH_BTN)
 
     # Clicks on the switch dropdown list button
@@ -79,6 +82,7 @@ class TopBar(BasePage):
     @allure.step("Click on the 'My Account' button")
     def click_my_account(self):
         self.click(self.MY_ACCOUNT_BTN)
+        return AccountPage(self.driver)
 
     # Clicks on the "Sign Out" button
     @allure.step("Click on the 'Sign Out' button")
@@ -118,6 +122,10 @@ class TopBar(BasePage):
 
     def get_cart_empty_msg(self):
         return self.get_text(self.EMPTY_CART_MSG)
+
+    def get_mini_cart_icon_qty(self):
+        self.wait_for_element_invisibility(*self.CART_LOADING)
+        return self.get_text(self.MINI_CART_COUNTER)
 
     def get_cart_icon_qty(self):
         self.wait_for_element_invisibility(*self.CART_LOADING)

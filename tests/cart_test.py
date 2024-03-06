@@ -50,9 +50,9 @@ class TestCart:
 
     @pytest.mark.usefixtures("setup_cart")
     @pytest.mark.usefixtures("tear_down_cart")
-    @allure.description("Test adding item to cart")
-    def test_add_item_to_cart(self):
-        assert top_bar.get_cart_icon_qty() == config_cart.EXPECTED_INITIAL_CART_QTY
+    @allure.description("Test adding item to mini cart")
+    def test_add_item_to_mini_cart(self):
+        assert top_bar.get_mini_cart_icon_qty() == config_cart.EXPECTED_INITIAL_CART_QTY
 
     @pytest.mark.usefixtures("setup_cart")
     @allure.description("Test removing item from cart")
@@ -66,9 +66,9 @@ class TestCart:
     @pytest.mark.usefixtures("tear_down_cart")
     @allure.description("Test updating cart quantity")
     def test_update_cart_qty(self):
-        assert top_bar.get_cart_icon_qty() == config_cart.EXPECTED_INITIAL_CART_QTY
+        assert top_bar.get_mini_cart_icon_qty() == config_cart.EXPECTED_INITIAL_CART_QTY
         product_page.click_add_to_cart()
-        assert top_bar.get_cart_icon_qty() == config_cart.EXPECTED_UPDATED_CART_QTY
+        assert top_bar.get_mini_cart_icon_qty() == config_cart.EXPECTED_UPDATED_CART_QTY
 
     @pytest.mark.usefixtures("tear_down_cart")
     @allure.description("Test subtotal equals total")
@@ -111,3 +111,13 @@ class TestCart:
         product_page.click_add_to_cart()
         cart_page = CartPage(self.driver)
         assert cart_page.get_error_cart_msg() == config_cart.QTY_ERROR_MSG
+
+    @pytest.mark.usefixtures("setup_cart")
+    @pytest.mark.usefixtures("tear_down_cart")
+    @allure.description("Test adding item to cart")
+    def test_add_item_to_cart(self):
+        top_bar.click_cart_icon()
+        mini_cart = MiniCartPage(self.driver)
+        mini_cart.view_cart()
+        cart=CartPage(self.driver)
+        assert top_bar.get_cart_icon_qty() == config_cart.EXPECTED_INITIAL_CART_QTY
