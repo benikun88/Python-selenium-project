@@ -42,6 +42,8 @@ class CheckoutPage(BasePage):
     SIGNIN_FROM_CHECKOUT_BTN = (By.CSS_SELECTOR, "button[class='action action-auth-toggle'] span")
     EMAIL_ADDRESS_SIGNIN_FROM_CHECKOUT_FIELD = (By.CSS_SELECTOR, "#login-email")
     PASSWORD_SIGNIN_FROM_CHECKOUT_FIELD = (By.CSS_SELECTOR, "#login-password")
+    SIGN_IN_FORM = (By.CSS_SELECTOR,
+                    "body > div:nth-child(5) > main:nth-child(2) > div:nth-child(3) > div:nth-child(1) > div:nth-child(4) > div:nth-child(1) > aside:nth-child(2) > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) > div:nth-child(1)")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -64,7 +66,7 @@ class CheckoutPage(BasePage):
         self.fill_text(self.PHONE_NUMBER_TEXT_BOX, phone_number)
 
     @allure.step("Fill shipping address information")
-    def fill_shipping_address(self,street_address, city, country, phone_number,zip_code):
+    def fill_shipping_address(self, street_address, city, country, phone_number, zip_code):
         self.fill_text(self.STREET_ADDRESS_TEXT_BOX, street_address)
         self.fill_text(self.CITY_TEXT_BOX, city)
         self.select_by_value(self.COUNTRY_DROP_LIST, country)
@@ -157,6 +159,7 @@ class CheckoutPage(BasePage):
 
     @allure.step("Click on the Sign-in from checkout button")
     def click_signin_from_checkout_button(self):
+        self.wait_for_element_invisibility(*self.CHECKOUT_PAGE_LOADER)
         self.click(self.SIGNIN_FROM_CHECKOUT_BTN)
 
     @allure.step("Fill email address field for sign-in from checkout")
@@ -166,3 +169,6 @@ class CheckoutPage(BasePage):
     @allure.step("Fill password field for sign-in from checkout")
     def fill_password_signin_from_checkout(self, password):
         self.fill_text(self.PASSWORD_SIGNIN_FROM_CHECKOUT_FIELD, password)
+
+    def get_sign_in_form_section(self):
+        return self.wait_for_element_visibility(*self.SIGN_IN_FORM)

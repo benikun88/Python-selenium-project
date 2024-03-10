@@ -18,6 +18,8 @@ class ProductPage(BasePage):
     PRODUCT_QTY = (By.CSS_SELECTOR, "#qty")
     ADD_TO_CART_BTN = (By.CSS_SELECTOR, "#product-addtocart-button")
     CHOSEN_SIZE = (By.CSS_SELECTOR, "div[class='swatch-attribute size'] span[class='swatch-attribute-selected-option']")
+    ADD_TO_COMPARE_LOGO = (By.CSS_SELECTOR, "div[class='product-addto-links'] a[class='action tocompare']")
+    ADD_TO_WISH_LIST_LOGO = (By.CSS_SELECTOR, "div[class='product-addto-links'] a[class='action towishlist']")
     CHOSEN_COLOR = (
         By.CSS_SELECTOR, "div[class='swatch-attribute color'] span[class='swatch-attribute-selected-option']")
 
@@ -61,3 +63,13 @@ class ProductPage(BasePage):
     def get_chosen_color(self):
         # Get the text of the chosen color element.
         return self.get_text(self.CHOSEN_COLOR)
+
+    def get_compare_logo(self):
+        # Find the cart section element and return it
+        # return self.driver.find_element(*self.MINI_CART_SECTION)
+        return self.wait_for_element_visibility(*self.ADD_TO_COMPARE_LOGO)
+
+    def get_wish_list_logo(self):
+        # Find the cart section element and return it
+        # return self.driver.find_element(*self.MINI_CART_SECTION)
+        return self.wait_for_element_visibility(*self.ADD_TO_WISH_LIST_LOGO)
