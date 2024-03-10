@@ -16,6 +16,7 @@ class TopBar(BasePage):
     CREATE_ACCOUNT_BTN = (By.XPATH, "//div[@class='panel header']//a[normalize-space()='Create an Account']")
     CART_ICON_BTN = (By.CSS_SELECTOR, ".action.showcart")
     CART_LOADING = (By.CSS_SELECTOR, "._block-content-loading")
+    MINI_CART_SECTION = (By.CSS_SELECTOR, "#ui-id-1")
     MINI_CART_COUNTER = (By.CSS_SELECTOR, ".counter-number")
     CART_COUNTER_EMPTY = (By.CSS_SELECTOR, ".counter.qty.empty .counter-number")
     EMPTY_CART_MSG = (By.CSS_SELECTOR, ".subtitle.empty")
@@ -130,3 +131,8 @@ class TopBar(BasePage):
     def get_cart_icon_qty(self):
         self.wait_for_element_invisibility(*self.CART_LOADING)
         return self.get_text(self.CART_COUNTER)
+
+    def get_cart_section(self):
+        # Find the cart section element and return it
+        # return self.driver.find_element(*self.MINI_CART_SECTION)
+        return self.wait_for_element_visibility(*self.MINI_CART_SECTION)

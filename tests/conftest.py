@@ -6,7 +6,8 @@ from _pytest.config import Config
 from selenium.webdriver.chrome.options import Options
 import allure
 from selenium import webdriver
-
+from applitools.selenium import Eyes
+from applitools.common import MatchLevel
 
 @pytest.fixture(autouse=True)
 def setup(request):
@@ -38,6 +39,14 @@ def pytest_exception_interact(report):
 
 def pytest_configure(config: Config) -> None:
     config.option.allure_report_dir = "allure-results"
+
+
+@pytest.fixture()
+def eyes():
+    eyes = Eyes()
+    eyes.api_key = 'yQZoWxzsvOfSFbrd3YGmcSpl1061UWFGuNz6dXPWMQvXA110'  # Set your Applitools API key here
+    yield eyes
+    eyes.abort_async()  # Make sure to abort the session to handle any exceptions
 
 # def pytest_sessionfinish() -> None:
 #     environment_properties = {

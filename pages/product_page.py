@@ -31,7 +31,6 @@ class ProductPage(BasePage):
     def choose_product_size(self, size):
         """Choose the product size on the page."""
         size_elements = self.wait_for_elements_visibility(*self.PRODUCT_SIZE_LIST)
-
         for size_element in size_elements:
             if size_element.get_attribute("option-label") == size:
                 size_element.click()
