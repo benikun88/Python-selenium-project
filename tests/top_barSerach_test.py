@@ -4,6 +4,7 @@ import pytest
 from pages.top_bar import TopBar
 
 
+@allure.feature("Top bar")
 class TestTopBar:
 
     @allure.description("Verify the visibility of the site logo")

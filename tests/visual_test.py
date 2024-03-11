@@ -9,6 +9,7 @@ from pages.product_page import ProductPage
 from pages.top_bar import TopBar
 
 
+@pytest.mark.xdist_group(name="serial")
 @pytest.mark.usefixtures("eyes")
 @allure.feature("UI Applitools")
 class TestVisual:
