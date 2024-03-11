@@ -93,5 +93,6 @@ class CartPage(BasePage):
     def get_error_cart_msg(self):
         return self.get_text(self.CART_ERROR_MSG)
 
+    @allure.step("Get cart icon qty")
     def get_cart_icon_qty(self):
         return self.get_text_from_attribute(self.CART_COUNTER,"value")

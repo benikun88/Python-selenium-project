@@ -121,18 +121,20 @@ class TopBar(BasePage):
     def is_search_bar_visible(self):
         return self.is_elements_exist(self.SEARCH_TEXT_BOX)
 
+    @allure.step("Get cart empty message")
     def get_cart_empty_msg(self):
         return self.get_text(self.EMPTY_CART_MSG)
 
+    @allure.step("Get mini cart icon quantity")
     def get_mini_cart_icon_qty(self):
         self.wait_for_element_invisibility(*self.CART_LOADING)
         return self.get_text(self.MINI_CART_COUNTER)
 
+    @allure.step("Get cart icon quantity")
     def get_cart_icon_qty(self):
         self.wait_for_element_invisibility(*self.CART_LOADING)
         return self.get_text(self.CART_COUNTER)
 
+    @allure.step("Get cart section")
     def get_cart_section(self):
-        # Find the cart section element and return it
-        # return self.driver.find_element(*self.MINI_CART_SECTION)
         return self.wait_for_element_visibility(*self.MINI_CART_SECTION)

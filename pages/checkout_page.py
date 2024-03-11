@@ -170,5 +170,6 @@ class CheckoutPage(BasePage):
     def fill_password_signin_from_checkout(self, password):
         self.fill_text(self.PASSWORD_SIGNIN_FROM_CHECKOUT_FIELD, password)
 
+    @allure.step("Get the sign in form section for visual testing")
     def get_sign_in_form_section(self):
         return self.wait_for_element_visibility(*self.SIGN_IN_FORM)

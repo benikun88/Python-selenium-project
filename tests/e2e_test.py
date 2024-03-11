@@ -14,6 +14,7 @@ from pages.top_bar import TopBar
 @allure.feature("E2E")
 @allure.description("E2E test")
 class TestE2E:
+    @allure.description("End-to-end purchase with a new account")
     def test_end_2_end_purchase_with_new_account(self):
         top_bar_page = TopBar(self.driver)
         create_account = top_bar_page.click_create_account()
@@ -43,6 +44,7 @@ class TestE2E:
         checkout_page.click_place_order()
         assert checkout_page.get_purchase_msg() == config_checkout.EXPECTED_SUCCESS_PURCHASE_MSG
 
+    @allure.description("End-to-end purchase with an existing account")
     @pytest.mark.xdist_group(name="serial")
     def test_end_2_end_purchase_with_exist_account(self):
         top_bar_page = TopBar(self.driver)
